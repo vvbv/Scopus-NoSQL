@@ -3,5 +3,5 @@
 Descarga desde dockerhub
 
 ```bash
-docker push vvbv/nosqlscopus:v1
+docker pull vvbv/nosqlscopus:v1
 ```
