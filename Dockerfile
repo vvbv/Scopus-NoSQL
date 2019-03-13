@@ -5,11 +5,11 @@ RUN apt install php7.0 php7.0-json -y
 RUN apt install mongodb -y
 RUN mkdir -p /data/db
 
-COPY vm/formatter.php /tools/formatter.php
-COPY vm/json /data/json
-COPY vm/import_db.sh /tools/import_db.sh
+COPY formatter.php /tools/formatter.php
+COPY dataset/json /dataset/json
+COPY import_db.sh /tools/import_db.sh
 
-WORKDIR /data/
+WORKDIR /dataset/
 RUN php -f /tools/formatter.php
 WORKDIR /
 ENTRYPOINT [ "/tools/import_db.sh" ]
