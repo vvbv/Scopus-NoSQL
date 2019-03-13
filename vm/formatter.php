@@ -1,8 +1,13 @@
 <?php
 
     $merged_articles = [];
-    
-    for ($i=1; $i < 11; $i++) { 
+    $mongo_dataset = "";
+
+    $location = "json/";
+    $fi = new FilesystemIterator($location, FilesystemIterator::SKIP_DOTS);
+    $fileCount = iterator_count($fi);
+
+    for ($i=1; $i < ( $fileCount + 1); $i++) { 
         $fp = fopen("json/$i.json", "r");
         $input = "";
         while (!feof($fp)){
@@ -61,19 +66,18 @@
 
         $arr_articles = json_decode( $input );
         foreach( $arr_articles as $key => $article ){
-            /*if($article->tradenames != ""){
-                echo $article->tradenames;
-                die();
-            }*/
-            $authors = explode (",", $article->authors);  
-            $authors_id = explode (";", $article->authors_id);
-            $affiliations = explode (",", $article->affiliations);
+            
             $article->author_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->author_keywords) );
             $article->index_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->index_keywords) );
             $article->references =  array_map( function($in){return trim( $in );} ,explode (";", $article->references) );
             $article->tradenames =  array_map( function($in){return trim( $in );} ,explode (",", $article->tradenames) );
             $article->editors = null;
             $article->sponsors = null;
+
+            $authors = explode (",", $article->authors);  
+            $authors_id = explode (";", $article->authors_id);
+            $affiliations = explode (",", $article->affiliations);
+
             $authors_with_id = [];
             foreach( $authors as $key => $author ){
                 $id = null;
@@ -95,11 +99,15 @@
             unset($article->affiliations);
             unset($article->authors_with_affiliations);
             $article->authors = $authors_with_id;
+            $mongo_dataset .= json_encode( $article ) . "\n" ;
             array_push( $merged_articles, $article );
         }
         
     }
 
-    //echo json_encode( $merged_articles[0] );
+    $file = 'mongo_dataset.json';
+    file_put_contents( $file, $mongo_dataset );
+    $file = 'merged_articles.json';
+    file_put_contents( $file, json_encode( $merged_articles ) );
     
 ?>
