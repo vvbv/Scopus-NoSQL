@@ -1,6 +1,5 @@
 # Scopus NoSQL*
-
-<italic>*Repositorio base para la construcción de la imagen.</italic>
+_<strong><small>* Repositorio base para la construcción de la imagen.</small></strong>_
 
 Descarga y ejecución:  [ <a href="https://hub.docker.com/r/vvbv/nosqlscopus">dockerhub</a> ]
 
