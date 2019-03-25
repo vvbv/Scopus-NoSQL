@@ -56,7 +56,7 @@
         $input = str_replace('"ISBN":','"isbn":',$input);
         $input = str_replace('"CODEN":','"coden":',$input);
         $input = str_replace('"PubMed ID":','"pubmed_id":',$input);
-        $input = str_replace('"Language of Original Document":','"language_of_original_document":',$input);
+        $input = str_replace('"Language of Original Document":','"original_language":',$input);
         $input = str_replace('"Abbreviated Source Title":','"abbreviated_source_title":',$input);
         $input = str_replace('"Document Type":','"document_type":',$input);
         $input = str_replace('"Publication Stage":','"publication_stage":',$input);
@@ -116,6 +116,9 @@
             unset($article->access_type);
             unset($article->page_count);
             unset($article->molecular_sequence_numbers);
+            unset($article->document_type);
+            unset($article->publication_stage);
+            unset($article->source);
 
             $mongo_dataset .= json_encode( $article ) . "\n" ;
             array_push( $merged_articles, $article );
