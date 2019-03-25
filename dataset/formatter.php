@@ -42,6 +42,7 @@
         $input = str_replace('"Funding Details":','"funding_details":',$input);
         $input = str_replace('"Funding Text 1":','"funding_text_1":',$input);
         $input = str_replace('"Funding Text 2":','"funding_text_2":',$input);
+        $input = str_replace('"Funding Text 3":','"funding_text_3":',$input);
         $input = str_replace('"References":','"references":',$input);
         $input = str_replace('"Correspondence Address":','"correspondence_address":',$input);
         $input = str_replace('"Editors":','"editors":',$input);
@@ -66,14 +67,12 @@
 
         $arr_articles = json_decode( $input );
         foreach( $arr_articles as $key => $article ){
-            
+
             $article->author_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->author_keywords) );
             $article->index_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->index_keywords) );
             $article->references =  array_map( function($in){return trim( $in );} ,explode (";", $article->references) );
             $article->chemicals_cas =  array_map( function($in){return trim( $in );} ,explode (",", $article->chemicals_cas) );
             $article->tradenames =  array_map( function($in){return trim( $in );} ,explode (",", $article->tradenames) );
-            $article->editors = null;
-            $article->sponsors = null;
 
             $authors = explode (",", $article->authors);  
             $authors_id = explode (";", $article->authors_id);
@@ -100,6 +99,24 @@
             unset($article->affiliations);
             unset($article->authors_with_affiliations);
             $article->authors = $authors_with_id;
+            
+            //unused items removed
+            unset($article->manufacturers);
+            unset($article->funding_details);
+            unset($article->funding_text_1);
+            unset($article->funding_text_2);
+            unset($article->funding_text_3);
+            unset($article->editors);
+            unset($article->sponsors);
+            unset($article->conference_name);
+            unset($article->conference_date);
+            unset($article->conference_location);
+            unset($article->conference_code);
+            unset($article->isbn);
+            unset($article->access_type);
+            unset($article->page_count);
+            unset($article->molecular_sequence_numbers);
+
             $mongo_dataset .= json_encode( $article ) . "\n" ;
             array_push( $merged_articles, $article );
         }

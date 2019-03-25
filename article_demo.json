@@ -54,10 +54,9 @@
     "article_no": "",
     "page_start": 735,
     "page_end": 741,
-    "page_count": "",
     "cited_by": 1,
-    "doi": "10.1016/j.scitotenv.2017.07.101",
-    "link": "https://www.scopus.com/inward/record.uri?eid=2-s2.0-85026412413&doi=10.1016%2fj.scitotenv.2017.07.101&partnerID=40&md5=0fe7df234535ce8a840348d6fe2a204e",
+    "doi": "10.1016\/j.scitotenv.2017.07.101",
+    "link": "https:\/\/www.scopus.com\/inward\/record.uri?eid=2-s2.0-85026412413&doi=10.1016%2fj.scitotenv.2017.07.101&partnerID=40&md5=0fe7df234535ce8a840348d6fe2a204e",
     "abstract": "The controversy that iodine intake may increase the risk of thyroid cancer has heightened over the past twenty years. In this retrospective study, we mainly analyzed the association between water iodine and thyroid cancer and discussed the possible cause of the increase in thyroid cancer. This study was supported by three hospitals in areas with different water iodine concentration. 5574 patients with thyroid disease were recruited, of which 1429 patients had been diagnosed with thyroid cancer. These samples collectively were used to analyze the relationship of incidence and prevalence associated with water iodine. In addition, the ratio of maximum tumor diameter was analyzed. By analyzing the proportion of patients with thyroid cancer in thyroid diseases, we found a decrease in the proportion of thyroid cancer with increasing water iodine (P\u00a0<\u00a00.0001). In addition, there was no significant correlation between the median water iodine and the prevalence of thyroid cancer, including papillary thyroid cancer (P\u00a0>\u00a00.05). Meanwhile, the 5\u00a0years' cumulative incidence of thyroid cancer increased with years (P\u00a0<\u00a00.01). Comparing Cao county and Shan county, which are areas with high water iodine, to adequate iodine area such as in Mudan district, an increasing incidence is observed in 2010\u20132014 in Mudan district. Again, we observed a significant increase in the proportion of thyroid cancer with tumor size <\u00a01\u00a0cm (P\u00a0<\u00a00.01). Therefore, we concluded that cause(s) of increase in thyroid cancer may be ascribed to the sensitive diagnostic techniques and the improvement of living condition, but not water iodine. \u00a9 2017",
     "author_keywords": [
         "Incidence",
@@ -124,7 +123,6 @@
         "Water",
         "Water Pollutants, Chemical"
     ],
-    "molecular_sequence_numbers": "",
     "chemicals_cas": [
         "iodine",
         "7553-56-2; water",
@@ -134,11 +132,6 @@
     "tradenames": [
         ""
     ],
-    "manufacturers": "",
-    "funding_details": "",
-    "funding_text_1": "",
-    "funding_text_2": "",
-    "Funding Text 3": "",
     "references": [
         "Ahn, H.S., Welch, H.G., South Korea's thyroid-cancer \u201cepidemic\u201d - turning the tide (2015) N. Engl. J. Med., 373, pp. 2389-2390",
         "Ahn, H.S., Kim, H.J., Welch, H.G., Korea's thyroid-cancer \u201cepidemic\u201d\u2014screening and overdiagnosis (2014) N. Engl. J. Med., 371, pp. 1765-1767",
@@ -155,7 +148,7 @@
         "Ejaz, S., Akram, W., Lim, C.W., Lee, J.J., Hussain, I., Endocrine disrupting pesticides: a leading cause of cancer among rural people in Pakistan (2004) Exp. Oncol., 26, pp. 98-105",
         "Franceschi, S., Preston-Martin, S., Maso, L.D., Negri, E., Vecchia, C.L., Mack, W.J., Mctiernan, A., Mabuchi, K., A pooled analysis of case\u2013control studies of thyroid cancer. IV. Benign thyroid diseases (1999) Cancer Causes Control, 10, pp. 583-595",
         "Gaitan, E., Endemic goiter in western Colombia (1983) Ecol. Dis., 2, pp. 295-308",
-        "Determination and Classification of the Areas of High Water Iodine and the Endemic Areas of Iodine Excess Goiter (GB/T 19380-2003) (2003)",
+        "Determination and Classification of the Areas of High Water Iodine and the Endemic Areas of Iodine Excess Goiter (GB\/T 19380-2003) (2003)",
         "Guan, H., Teng, W., Yang, S., Comparative epidemiological study on thyroid cancer in areas with different iodine intakes (2001) Zhonghua Yi Xue Za Zhi, 81, pp. 457-458",
         "Hallgren, S., Darnerud, P.O., Polybrominated diphenyl ethers (PBDEs), polychlorinated biphenyls (PCBs) and chlorinated paraffins (CPs) in rats-testing interactions and mechanisms for thyroid hormone effects (2002) Toxicology, 177, pp. 227-243",
         "Horn-Ross, P.L., Morris, J.S., Lee, M., West, D.W., Whittemore, A.S., Mcdougall, I.R., Nowels, K., Shiau, A.C., Iodine and thyroid cancer risk among women in a multiethnic population: the Bay Area Thyroid Cancer Study (2001) Cancer Epidemiol. Biomark. Prev., 10, pp. 979-985",
@@ -183,22 +176,14 @@
         "Zimmermann, M.B., Galetti, V., Iodine intake as a risk factor for thyroid cancer: a comprehensive review of animal and human studies (2015) Thyroid. Res., 8, pp. 1-21"
     ],
     "correspondence_address": "Sun, D.; Center for Endemic Disease Control, Chinese Center for Disease Control and Prevention, Harbin Medical University, Key Lab of Etiology and Epidemiology, Education Bureau of Heilongjiang Province & Ministry of Health (23618504), Harbin Medical UniversityChina; email: hrbmusdj@163.com",
-    "editors": null,
-    "sponsors": null,
     "publisher": "Elsevier B.V.",
-    "conference_name": "",
-    "conference_date": "",
-    "conference_location": "",
-    "conference_code": "",
     "issn": "00489697",
-    "isbn": "",
     "coden": "STEVA",
     "pubmed_id": 28763670,
     "language_of_original_document": "English",
     "abbreviated_source_title": "Sci. Total Environ.",
     "document_type": "Article",
     "publication_stage": "Final",
-    "access_type": "",
     "source": "Scopus",
     "eid": "2-s2.0-85026412413"
 }
