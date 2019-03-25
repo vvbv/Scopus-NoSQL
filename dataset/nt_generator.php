@@ -121,6 +121,10 @@
                 "<" . $local_terms . "eid" . ">" . " " . 
                 "\"" . $article->eid . "\"" . ".};\n";
             
+            $type =
+                $base . $subject . " " . 
+                $rdf_type . " " . 
+                "<" . $local_objects . "ScopusArticle" . ">" . ".};\n";
             
         }
         
