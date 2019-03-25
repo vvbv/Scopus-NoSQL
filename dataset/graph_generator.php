@@ -103,10 +103,14 @@
                 "<" . $local_terms . "coden" . ">" . " " . 
                 "\"" . $article->coden . "\"" . ".};\n";
             
-            $pubmed_id =
-                $base . $subject . " " . 
-                "<" . $local_terms . "pubmed_id" . ">" . " " . 
-                $article->pubmed_id . ".};\n";
+            $pubmed_id = "";
+
+            if( $article->pubmed_id ){
+                $pubmed_id =
+                    $base . $subject . " " . 
+                    "<" . $local_terms . "pubmed_id" . ">" . " " . 
+                    $article->pubmed_id . ".};\n";
+            }
             
             $original_language =
                 $base . $subject . " " . 
