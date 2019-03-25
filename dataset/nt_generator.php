@@ -14,6 +14,20 @@
 
     //formatter: $merged_articles
     foreach( $merged_articles as $key => $article ){
+
+        //Block: Article base
+        {
+            $fname = preg_replace("/[^a-zA-Z0-9]+/", "", str_replace( " ", "_",  str_replace( ".", "", $article->title ) ) );
+            $subject = "<" . $local_objects . "article/" . $fname . ">";
+
+            $title =
+                $base . $subject . " " . 
+                "<" . $local_terms . "title" . ">" . " " . 
+                "\"" . $article->title . "\"" . ".};\n";
+            
+            
+
+        }
         
         //Block: author information
         {
