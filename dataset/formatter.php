@@ -71,8 +71,19 @@
             $article->author_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->author_keywords) );
             $article->index_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->index_keywords) );
             $article->references =  array_map( function($in){return trim( str_replace( "\"", "\\\"" , $in) );} ,explode (";", $article->references) );
-            $article->chemicals_cas =  array_map( function($in){return trim( $in );} ,explode (",", $article->chemicals_cas) );
-            $article->tradenames =  array_map( function($in){return trim( $in );} ,explode (",", $article->tradenames) );
+            $article->chemicals_cas =  array_map( function($in){return trim( str_replace( "\"", "\\\"" , $in) );} ,explode (",", $article->chemicals_cas) );
+            $article->tradenames =  array_map( function($in){return trim( str_replace( "\"", "\\\"" , $in) );} ,explode (",", $article->tradenames) );
+            $article->abstract = str_replace( "\"", "\\\"", $article->abstract );
+            $article->title = str_replace( "\"", "\\\"", $article->title );
+            $article->source_title = str_replace( "\"", "\\\"", $article->source_title );
+            $article->article_no = str_replace( "\"", "\\\"", $article->article_no );
+            $article->doi = str_replace( "\"", "\\\"", $article->doi );
+            $article->link = str_replace( "\"", "\\\"", $article->link );
+            $article->correspondence_address = str_replace( "\"", "\\\"", $article->correspondence_address );
+            $article->publisher = str_replace( "\"", "\\\"", $article->publisher );
+            $article->coden = str_replace( "\"", "\\\"", $article->coden );
+            $article->abbreviated_source_title = str_replace( "\"", "\\\"", $article->abbreviated_source_title );
+
 
             $authors = explode (",", $article->authors);  
             $authors_id = explode (";", $article->authors_id);
