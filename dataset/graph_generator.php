@@ -15,10 +15,12 @@
     //formatter: $merged_articles
     foreach( $merged_articles as $key => $article ){
 
+        $articleFname = preg_replace("/[^a-zA-Z0-9]+/", "", str_replace( " ", "_",  str_replace( ".", "", $article->title ) ) );
+
         //Block: Article base
         {
-            $fname = preg_replace("/[^a-zA-Z0-9]+/", "", str_replace( " ", "_",  str_replace( ".", "", $article->title ) ) );
-            $subject = "<" . $local_objects . "article/" . $fname . ">";
+            
+            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
 
             $title =
                 $base . $subject . " " . 
@@ -126,6 +128,92 @@
                 $rdf_type . " " . 
                 "<" . $local_objects . "ScopusArticle" . ">" . ".};\n";
             
+            echo $title  . 
+            $year .
+            $source_title  . 
+            $volume  . 
+            $issue  . 
+            $article_no . 
+            $page_start  . 
+            $page_end  . 
+            $cited_by  . 
+            $doi  . 
+            $link  . 
+            $abstract  . 
+            $correspondence_address  . 
+            $publisher  . 
+            $issn  . 
+            $coden  . 
+            $pubmed_id  . 
+            $original_language  . 
+            $abbreviated_source_title . 
+            $eid;    
+            
+        }
+
+        //Block: author_keywords
+        {
+            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
+            $list = $base . $subject . " " . "rdf:list" . " (";
+
+            foreach ($article->author_keywords as $key => $value) {
+                $list .= $value;
+            }
+
+            $list .= ").;\n";
+            echo $list;
+        }
+
+        //Block: index_keywords
+        {
+            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
+            $list = $base . $subject . " " . "rdf:list" . " (";
+
+            foreach ($article->index_keywords as $key => $value) {
+                $list .= $value;
+            }
+
+            $list .= ").;\n";
+            echo $list;
+        }
+
+        //Block: chemicals_cas
+        {
+            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
+            $list = $base . $subject . " " . "rdf:list" . " (";
+
+            foreach ($article->chemicals_cas as $key => $value) {
+                $list .= $value;
+            }
+
+            $list .= ").;\n";
+            echo $list;
+        }
+
+        //Block: tradenames
+        {
+            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
+            $list = $base . $subject . " " . "rdf:list" . " (";
+
+            foreach ($article->tradenames as $key => $value) {
+                $list .= $value;
+            }
+
+            $list .= ").;\n";
+            echo $list;
+        }
+
+        //Block: references
+        {
+            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
+            $list = $base . $subject . " " . "rdf:list" . " (";
+
+            foreach ($article->references as $key => $value) {
+                $list .= $value;
+            }
+
+            $list .= ").;\n";
+            echo $list;
         }
         
         //Block: author information
@@ -144,6 +232,11 @@
                     $base . $subject . " " . 
                     $rdf_type . " " . 
                     "<" .  $foaf . "Person" . ">" . ".};\n"; 
+                
+                $written_by =
+                    $base . "<" . $local_objects . "article/" . $articleFname . ">" . " " . 
+                    "<" . $local_terms . "written_by" . ">" . " " . 
+                    $subject . ".};\n";
                     
                 $foaf_name = 
                     $base .$subject . " " . 
@@ -181,6 +274,7 @@
                     $subject . ".};\n";
 
                 echo $type_person  . 
+                $written_by .
                 $foaf_name  . 
                 $foaf_account  . 
                 $foaf_account_name  . 
