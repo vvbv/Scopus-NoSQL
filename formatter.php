@@ -89,9 +89,9 @@
                     $affiliation = $affiliations[ $key ];
                 }
                 $merged_author = [
-                    'name' => $author,
-                    'id' => $id,
-                    'affiliation' => $affiliation
+                    'name' => trim($author),
+                    'id' => trim($id),
+                    'affiliation' => trim($affiliation)
                 ];
                 array_push( $authors_with_id, $merged_author );
             }
