@@ -25,6 +25,47 @@
                 "<" . $local_terms . "title" . ">" . " " . 
                 "\"" . $article->title . "\"" . ".};\n";
             
+            $year =
+                $base . $subject . " " . 
+                "<" . $local_terms . "year" . ">" . " " . 
+                $article->year . ".};\n";
+            
+            $source_title =
+                $base . $subject . " " . 
+                "<" . $local_terms . "source_title" . ">" . " " . 
+                "\"" . $article->source_title . "\"" . ".};\n";
+            
+            $volume =
+                $base . $subject . " " . 
+                "<" . $local_terms . "volume" . ">" . " " . 
+                $article->volume . ".};\n";
+            
+            
+            $issue =
+                $base . $subject . " " . 
+                "<" . $local_terms . "issue" . ">" . " " . 
+                "\"" . $article->issue . "\"" . ".};\n";
+            
+            $article_no =
+                $base . $subject . " " . 
+                "<" . $local_terms . "article_no" . ">" . " " . 
+                "\"" . $article->article_no . "\"" . ".};\n";
+            
+            $page_start =
+                $base . $subject . " " . 
+                "<" . $local_terms . "page_start" . ">" . " " . 
+                "\"" . $article->page_start . "\"" . ".};\n";
+            
+            $page_end =
+                $base . $subject . " " . 
+                "<" . $local_terms . "page_end" . ">" . " " . 
+                "\"" . $article->page_end . "\"" . ".};\n";
+            
+            $cited_by =
+                $base . $subject . " " . 
+                "<" . $local_terms . "cited_by" . ">" . " " . 
+                "\"" . $article->cited_by . "\"" . ".};\n";
+            
             
 
         }
