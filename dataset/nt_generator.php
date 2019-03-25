@@ -66,8 +66,62 @@
                 "<" . $local_terms . "cited_by" . ">" . " " . 
                 "\"" . $article->cited_by . "\"" . ".};\n";
             
+            $doi =
+                $base . $subject . " " . 
+                "<" . $local_terms . "doi" . ">" . " " . 
+                "\"" . $article->doi . "\"" . ".};\n";
             
-
+            $link =
+                $base . $subject . " " . 
+                "<" . $local_terms . "link" . ">" . " " . 
+                "\"" . $article->link . "\"" . ".};\n";
+            
+            $abstract =
+                $base . $subject . " " . 
+                "<" . $local_terms . "abstract" . ">" . " " . 
+                "\"" . $article->abstract . "\"" . ".};\n";
+            
+            $correspondence_address =
+                $base . $subject . " " . 
+                "<" . $local_terms . "correspondence_address" . ">" . " " . 
+                "\"" . $article->correspondence_address . "\"" . ".};\n";
+            
+            $publisher =
+                $base . $subject . " " . 
+                "<" . $local_terms . "publisher" . ">" . " " . 
+                "\"" . $article->publisher . "\"" . ".};\n";
+            
+            $issn =
+                $base . $subject . " " . 
+                "<" . $local_terms . "issn" . ">" . " " . 
+                "\"" . $article->issn . "\"" . ".};\n";
+            
+            $coden =
+                $base . $subject . " " . 
+                "<" . $local_terms . "coden" . ">" . " " . 
+                "\"" . $article->coden . "\"" . ".};\n";
+            
+            $pubmed_id =
+                $base . $subject . " " . 
+                "<" . $local_terms . "pubmed_id" . ">" . " " . 
+                $article->pubmed_id . ".};\n";
+            
+            $original_language =
+                $base . $subject . " " . 
+                "<" . $local_terms . "original_language" . ">" . " " . 
+                "\"" . $article->original_language . "\"" . ".};\n";
+            
+            $abbreviated_source_title =
+                $base . $subject . " " . 
+                "<" . $local_terms . "abbreviated_source_title" . ">" . " " . 
+                "\"" . $article->abbreviated_source_title . "\"" . ".};\n";
+            
+            $eid =
+                $base . $subject . " " . 
+                "<" . $local_terms . "eid" . ">" . " " . 
+                "\"" . $article->eid . "\"" . ".};\n";
+            
+            
         }
         
         //Block: author information
