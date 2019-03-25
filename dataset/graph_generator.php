@@ -127,7 +127,7 @@
                 "<" . $local_terms . "eid" . ">" . " " . 
                 "\"" . $article->eid . "\"" . ".};\n";
             
-            $type =
+            $ScopusArticle =
                 $base . $subject . " " . 
                 $rdf_type . " " . 
                 "<" . $local_objects . "ScopusArticle" . ">" . ".};\n";
@@ -151,7 +151,8 @@
             $pubmed_id  . 
             $original_language  . 
             $abbreviated_source_title . 
-            $eid;    
+            $eid . 
+            $ScopusArticle;    
             
         }
 
