@@ -7,6 +7,10 @@
     $foaf = "http://xmlns.com/foaf/0.1/";
     $rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 
+    echo "SPARQL PREFIX lo: <$local_objects>\n";
+    echo "SPARQL PREFIX lt: <$local_terms>\n";
+    echo "SPARQL PREFIX lg: <$local_groups>\n";
+
     $rdf_type = "<" . $rdf . "type" . ">";
     
     $base = "SPARQL INSERT INTO <articles_metadata> {";
