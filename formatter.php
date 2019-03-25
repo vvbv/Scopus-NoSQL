@@ -7,7 +7,7 @@
     $fi = new FilesystemIterator($location, FilesystemIterator::SKIP_DOTS);
     $fileCount = iterator_count($fi);
 
-    for ($i=1; $i < ( $fileCount + 1); $i++) { 
+    for ($i=1; $i < ( $fileCount + 1 ); $i++) { 
         $fp = fopen("json/$i.json", "r");
         $input = "";
         while (!feof($fp)){
@@ -70,6 +70,7 @@
             $article->author_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->author_keywords) );
             $article->index_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->index_keywords) );
             $article->references =  array_map( function($in){return trim( $in );} ,explode (";", $article->references) );
+            $article->chemicals_cas =  array_map( function($in){return trim( $in );} ,explode (",", $article->chemicals_cas) );
             $article->tradenames =  array_map( function($in){return trim( $in );} ,explode (",", $article->tradenames) );
             $article->editors = null;
             $article->sponsors = null;
