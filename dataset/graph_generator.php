@@ -40,7 +40,7 @@
             $volume =
                 $base . $subject . " " . 
                 "<" . $local_terms . "volume" . ">" . " " . 
-                $article->volume . ".};\n";
+                "\"" . $article->volume . "\"" .  ".};\n";
             
             
             $issue =
