@@ -67,7 +67,7 @@
 
         $arr_articles = json_decode( $input );
         foreach( $arr_articles as $key => $article ){
-
+            
             $article->author_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->author_keywords) );
             $article->index_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->index_keywords) );
             $article->references =  array_map( function($in){return trim( $in );} ,explode (";", $article->references) );
