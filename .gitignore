@@ -1,2 +1,3 @@
 dataset/merged_articles.json
 dataset/mongo_dataset.json
+dataset/graph.rq

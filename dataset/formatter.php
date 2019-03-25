@@ -70,7 +70,7 @@
 
             $article->author_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->author_keywords) );
             $article->index_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->index_keywords) );
-            $article->references =  array_map( function($in){return trim( $in );} ,explode (";", $article->references) );
+            $article->references =  array_map( function($in){return trim( str_replace( "\"", "\\\"" , $in) );} ,explode (";", $article->references) );
             $article->chemicals_cas =  array_map( function($in){return trim( $in );} ,explode (",", $article->chemicals_cas) );
             $article->tradenames =  array_map( function($in){return trim( $in );} ,explode (",", $article->tradenames) );
 

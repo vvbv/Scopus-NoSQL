@@ -157,10 +157,10 @@
             $list = $base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->author_keywords as $key => $value) {
-                $list .= $value;
+                $list .= "\"" . $value . "\" ";
             }
 
-            $list .= ").;\n";
+            $list .= ").};\n";
             echo $list;
         }
 
@@ -170,10 +170,10 @@
             $list = $base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->index_keywords as $key => $value) {
-                $list .= $value;
+                $list .= "\"" . $value . "\" ";
             }
 
-            $list .= ").;\n";
+            $list .= ").};\n";
             echo $list;
         }
 
@@ -183,10 +183,10 @@
             $list = $base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->chemicals_cas as $key => $value) {
-                $list .= $value;
+                $list .= "\"" . $value . "\" ";
             }
 
-            $list .= ").;\n";
+            $list .= ").};\n";
             echo $list;
         }
 
@@ -196,10 +196,10 @@
             $list = $base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->tradenames as $key => $value) {
-                $list .= $value;
+                $list .= "\"" . $value . "\" ";
             }
 
-            $list .= ").;\n";
+            $list .= ").};\n";
             echo $list;
         }
 
@@ -209,10 +209,10 @@
             $list = $base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->references as $key => $value) {
-                $list .= $value;
+                $list .= "\"" . $value . "\" ";
             }
 
-            $list .= ").;\n";
+            $list .= ").};\n";
             echo $list;
         }
         
