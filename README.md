@@ -13,7 +13,7 @@ El siguiente repositorio contiene todo lo necesario para la construcción de una
 ###  Descarga y ejecución [ <a href="https://hub.docker.com/r/vvbv/nosqlscopus">dockerhub</a> ]:
 
 ```bash
-docker run -it vvbv/nosqlscopus:v3
+docker run -it vvbv/nosqlscopus:v3 #Entrega 1
 ```
 <hr>  
 
