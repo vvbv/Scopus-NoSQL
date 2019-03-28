@@ -13,7 +13,7 @@ El siguiente repositorio contiene todo lo necesario para la construcción de una
 ###  Descarga y ejecución [ <a href="https://hub.docker.com/r/vvbv/nosqlscopus">dockerhub</a> ]:
 
 ```bash
-docker run -it vvbv/nosqlscopus:v3
+docker run -it vvbv/nosqlscopus:v3 #Entrega 1
 ```
 <hr>  
 
@@ -23,7 +23,7 @@ docker run -it vvbv/nosqlscopus:v3
 
 <hr>
 
-### Pruebas:
+### Pruebas [MongoDB]:
 
 Cantidad de artículos publicados en un determinado año:
 
@@ -35,6 +35,22 @@ Artículos publicados, entre los cuales, un
 determinado autor ha hecho parte de este:
 
 - ```db.articles.find({"authors.name": "Lv C."}).pretty()```
+
+<hr>
+
+### Pruebas [SPARQL]:
+
+```sparql
+PREFIX lo: <http://127.0.0.1/objects/> 
+PREFIX lt: <http://127.0.0.1/terms/> 
+
+SELECT ?articles ?title FROM <articles_metadata>  WHERE { 
+ ?person rdf:type foaf:Person.
+ ?person foaf:name "Lv C.".
+ ?articles lt:written_by ?person.
+ ?articles lt:title ?title.
+};
+```
 
 <hr>
 

@@ -6,44 +6,44 @@
             "affiliation": "Center for Endemic Disease Control"
         },
         {
-            "name": " Yang Y.",
+            "name": "Yang Y.",
             "id": "7409385456",
-            "affiliation": " Chinese Center for Disease Control and Prevention"
+            "affiliation": "Chinese Center for Disease Control and Prevention"
         },
         {
-            "name": " Jiang L.",
+            "name": "Jiang L.",
             "id": "57198538359",
-            "affiliation": " Harbin Medical University"
+            "affiliation": "Harbin Medical University"
         },
         {
-            "name": " Gao L.",
+            "name": "Gao L.",
             "id": "57190749149",
-            "affiliation": " Harbin"
+            "affiliation": "Harbin"
         },
         {
-            "name": " Rong S.",
+            "name": "Rong S.",
             "id": "54414669500",
-            "affiliation": " Heilongjiang Province  150081"
+            "affiliation": "Heilongjiang Province  150081"
         },
         {
-            "name": " Darko G.M.",
+            "name": "Darko G.M.",
             "id": "57190729739",
-            "affiliation": " China; Shandong Institute of Prevention and Control for Endemic Disease"
+            "affiliation": "China; Shandong Institute of Prevention and Control for Endemic Disease"
         },
         {
-            "name": " Jiang W.",
+            "name": "Jiang W.",
             "id": "55276495900",
-            "affiliation": " Jinan"
+            "affiliation": "Jinan"
         },
         {
-            "name": " Gao Y.",
+            "name": "Gao Y.",
             "id": "8587799600",
-            "affiliation": " 250014"
+            "affiliation": "250014"
         },
         {
-            "name": " Sun D.",
+            "name": "Sun D.",
             "id": "56220416600",
-            "affiliation": " China; Key Lab of Etiology and Epidemiology"
+            "affiliation": "China; Key Lab of Etiology and Epidemiology"
         }
     ],
     "title": "Association between chronic exposure to different water iodine and thyroid cancer: A retrospective study from 1995 to 2014",
@@ -54,11 +54,10 @@
     "article_no": "",
     "page_start": 735,
     "page_end": 741,
-    "page_count": "",
     "cited_by": 1,
-    "doi": "10.1016/j.scitotenv.2017.07.101",
-    "link": "https://www.scopus.com/inward/record.uri?eid=2-s2.0-85026412413&doi=10.1016%2fj.scitotenv.2017.07.101&partnerID=40&md5=0fe7df234535ce8a840348d6fe2a204e",
-    "abstract": "The controversy that iodine intake may increase the risk of thyroid cancer has heightened over the past twenty years. In this retrospective study, we mainly analyzed the association between water iodine and thyroid cancer and discussed the possible cause of the increase in thyroid cancer. This study was supported by three hospitals in areas with different water iodine concentration. 5574 patients with thyroid disease were recruited, of which 1429 patients had been diagnosed with thyroid cancer. These samples collectively were used to analyze the relationship of incidence and prevalence associated with water iodine. In addition, the ratio of maximum tumor diameter was analyzed. By analyzing the proportion of patients with thyroid cancer in thyroid diseases, we found a decrease in the proportion of thyroid cancer with increasing water iodine (P < 0.0001). In addition, there was no significant correlation between the median water iodine and the prevalence of thyroid cancer, including papillary thyroid cancer (P > 0.05). Meanwhile, the 5 years' cumulative incidence of thyroid cancer increased with years (P < 0.01). Comparing Cao county and Shan county, which are areas with high water iodine, to adequate iodine area such as in Mudan district, an increasing incidence is observed in 2010–2014 in Mudan district. Again, we observed a significant increase in the proportion of thyroid cancer with tumor size < 1 cm (P < 0.01). Therefore, we concluded that cause(s) of increase in thyroid cancer may be ascribed to the sensitive diagnostic techniques and the improvement of living condition, but not water iodine. © 2017",
+    "doi": "10.1016\/j.scitotenv.2017.07.101",
+    "link": "https:\/\/www.scopus.com\/inward\/record.uri?eid=2-s2.0-85026412413&doi=10.1016%2fj.scitotenv.2017.07.101&partnerID=40&md5=0fe7df234535ce8a840348d6fe2a204e",
+    "abstract": "The controversy that iodine intake may increase the risk of thyroid cancer has heightened over the past twenty years. In this retrospective study, we mainly analyzed the association between water iodine and thyroid cancer and discussed the possible cause of the increase in thyroid cancer. This study was supported by three hospitals in areas with different water iodine concentration. 5574 patients with thyroid disease were recruited, of which 1429 patients had been diagnosed with thyroid cancer. These samples collectively were used to analyze the relationship of incidence and prevalence associated with water iodine. In addition, the ratio of maximum tumor diameter was analyzed. By analyzing the proportion of patients with thyroid cancer in thyroid diseases, we found a decrease in the proportion of thyroid cancer with increasing water iodine (P\u00a0<\u00a00.0001). In addition, there was no significant correlation between the median water iodine and the prevalence of thyroid cancer, including papillary thyroid cancer (P\u00a0>\u00a00.05). Meanwhile, the 5\u00a0years' cumulative incidence of thyroid cancer increased with years (P\u00a0<\u00a00.01). Comparing Cao county and Shan county, which are areas with high water iodine, to adequate iodine area such as in Mudan district, an increasing incidence is observed in 2010\u20132014 in Mudan district. Again, we observed a significant increase in the proportion of thyroid cancer with tumor size <\u00a01\u00a0cm (P\u00a0<\u00a00.01). Therefore, we concluded that cause(s) of increase in thyroid cancer may be ascribed to the sensitive diagnostic techniques and the improvement of living condition, but not water iodine. \u00a9 2017",
     "author_keywords": [
         "Incidence",
         "Retrospective study",
@@ -124,33 +123,32 @@
         "Water",
         "Water Pollutants, Chemical"
     ],
-    "molecular_sequence_numbers": "",
-    "chemicals_cas": "iodine, 7553-56-2; water, 7732-18-5; Iodine; Water; Water Pollutants, Chemical",
+    "chemicals_cas": [
+        "iodine",
+        "7553-56-2; water",
+        "7732-18-5; Iodine; Water; Water Pollutants",
+        "Chemical"
+    ],
     "tradenames": [
         ""
     ],
-    "manufacturers": "",
-    "funding_details": "",
-    "funding_text_1": "",
-    "funding_text_2": "",
-    "Funding Text 3": "",
     "references": [
-        "Ahn, H.S., Welch, H.G., South Korea's thyroid-cancer “epidemic” - turning the tide (2015) N. Engl. J. Med., 373, pp. 2389-2390",
-        "Ahn, H.S., Kim, H.J., Welch, H.G., Korea's thyroid-cancer “epidemic”—screening and overdiagnosis (2014) N. Engl. J. Med., 371, pp. 1765-1767",
+        "Ahn, H.S., Welch, H.G., South Korea's thyroid-cancer \u201cepidemic\u201d - turning the tide (2015) N. Engl. J. Med., 373, pp. 2389-2390",
+        "Ahn, H.S., Kim, H.J., Welch, H.G., Korea's thyroid-cancer \u201cepidemic\u201d\u2014screening and overdiagnosis (2014) N. Engl. J. Med., 371, pp. 1765-1767",
         "Belfiore, A., La Rosa, G.L., La Porta, G.A., Giuffrida, D., Milazzo, G., Lupo, L., Regalbuto, C., Vigneri, R., Cancer risk in patients with cold thyroid nodules: relevance of iodine intake, sex, age, and multinodularity (1992) Am. J. Med., 93, pp. 363-369",
-        "Bounacer, A., Wicker, R., Caillou, B., Cailleux, A.F., Sarasin, A., Schlumberger, M., Suárez, H.G., High prevalence of activating ret proto-oncogene rearrangements, in thyroid tumors from patients who had received external radiation (1997) Oncogene, 15, pp. 1263-1273",
+        "Bounacer, A., Wicker, R., Caillou, B., Cailleux, A.F., Sarasin, A., Schlumberger, M., Su\u00e1rez, H.G., High prevalence of activating ret proto-oncogene rearrangements, in thyroid tumors from patients who had received external radiation (1997) Oncogene, 15, pp. 1263-1273",
         "Chen, Z., Xu, W., Huang, Y., Jin, X., Deng, J., Zhu, S., Liu, H., Yu, Y., Associations of noniodized salt and thyroid nodule among the Chinese population: a large cross-sectional study (2013) Am. J. Clin. Nutr., 98, pp. 684-692",
         "Choi, S.W., Ryu, S.Y., Han, M., Park, J., The association between the socioeconomic status and thyroid cancer prevalence",
-        "based on the Korean National Health and Nutrition Examination Survey 2010–2011 (2013) J. Korean Med. Sci., 28, pp. 1734-1740",
-        "Cléro, É., Doyon, F., Chungue, V., Rachédi, F., Boissin, J.L., Sebbag, J., Shan, L., Dewailly, E., Dietary iodine and thyroid cancer risk in French Polynesia: a case-control study (2012) Thyroid, 22, pp. 422-429",
-        "Davies, L., Welch, H.G., Increasing incidence of thyroid cancer in the United States, 1973–2002 (2006) JAMA, 295, pp. 2164-2167",
+        "based on the Korean National Health and Nutrition Examination Survey 2010\u20132011 (2013) J. Korean Med. Sci., 28, pp. 1734-1740",
+        "Cl\u00e9ro, \u00c9., Doyon, F., Chungue, V., Rach\u00e9di, F., Boissin, J.L., Sebbag, J., Shan, L., Dewailly, E., Dietary iodine and thyroid cancer risk in French Polynesia: a case-control study (2012) Thyroid, 22, pp. 422-429",
+        "Davies, L., Welch, H.G., Increasing incidence of thyroid cancer in the United States, 1973\u20132002 (2006) JAMA, 295, pp. 2164-2167",
         "Derwahl, M., Nicula, D., Estrogen and its role in thyroid cancer (2014) Endocr. Relat. Cancer, 21, p. T273",
         "Dong, W., Zhang, H., Zhang, P., Li, X., Liang, H., Wang, Z., Liu, Y., The changing incidence of thyroid carcinoma in Shenyang, China before and after universal salt iodization (2013) Med. Sci. Monit., 19, pp. 49-53",
-        "Duntas, L.H., Doumas, C., The ‘rings of fire’ and thyroid cancer (2009) Hormones, 8, pp. 249-253",
+        "Duntas, L.H., Doumas, C., The \u2018rings of fire\u2019 and thyroid cancer (2009) Hormones, 8, pp. 249-253",
         "Ejaz, S., Akram, W., Lim, C.W., Lee, J.J., Hussain, I., Endocrine disrupting pesticides: a leading cause of cancer among rural people in Pakistan (2004) Exp. Oncol., 26, pp. 98-105",
-        "Franceschi, S., Preston-Martin, S., Maso, L.D., Negri, E., Vecchia, C.L., Mack, W.J., Mctiernan, A., Mabuchi, K., A pooled analysis of case–control studies of thyroid cancer. IV. Benign thyroid diseases (1999) Cancer Causes Control, 10, pp. 583-595",
+        "Franceschi, S., Preston-Martin, S., Maso, L.D., Negri, E., Vecchia, C.L., Mack, W.J., Mctiernan, A., Mabuchi, K., A pooled analysis of case\u2013control studies of thyroid cancer. IV. Benign thyroid diseases (1999) Cancer Causes Control, 10, pp. 583-595",
         "Gaitan, E., Endemic goiter in western Colombia (1983) Ecol. Dis., 2, pp. 295-308",
-        "Determination and Classification of the Areas of High Water Iodine and the Endemic Areas of Iodine Excess Goiter (GB/T 19380-2003) (2003)",
+        "Determination and Classification of the Areas of High Water Iodine and the Endemic Areas of Iodine Excess Goiter (GB\/T 19380-2003) (2003)",
         "Guan, H., Teng, W., Yang, S., Comparative epidemiological study on thyroid cancer in areas with different iodine intakes (2001) Zhonghua Yi Xue Za Zhi, 81, pp. 457-458",
         "Hallgren, S., Darnerud, P.O., Polybrominated diphenyl ethers (PBDEs), polychlorinated biphenyls (PCBs) and chlorinated paraffins (CPs) in rats-testing interactions and mechanisms for thyroid hormone effects (2002) Toxicology, 177, pp. 227-243",
         "Horn-Ross, P.L., Morris, J.S., Lee, M., West, D.W., Whittemore, A.S., Mcdougall, I.R., Nowels, K., Shiau, A.C., Iodine and thyroid cancer risk among women in a multiethnic population: the Bay Area Thyroid Cancer Study (2001) Cancer Epidemiol. Biomark. Prev., 10, pp. 979-985",
@@ -165,7 +163,7 @@
         "Miki, H., Oshimo, K., Inoue, H., Morimoto, T., Monden, Y., Sex hormone receptors in human thyroid tissues (1990) Cancer, 66, p. 1759",
         "Parkin, D.M., Bray, F., Ferlay, J., Pisani, P., Global cancer statistics, 2002 (2005) CA Cancer J. Clin., 55, pp. 74-108",
         "Renehan, A.G., Tyson, M., Egger, M., Heller, R.F., Zwahlen, M., Body-mass index and incidence of cancer: a systematic review and meta-analysis of prospective observational studies (2008) Lancet, 371, pp. 569-578",
-        "Rinaldi, S., Lise, M., Clavel-Chapelon, F., Boutron-Ruault, M.C., Guillas, G., Overvad, K., Tjønneland, A., Kaaks, R., Body size and risk of differentiated thyroid carcinomas: findings from the EPIC study (2012) Int. J. Cancer, 131, pp. 1004-1014",
+        "Rinaldi, S., Lise, M., Clavel-Chapelon, F., Boutron-Ruault, M.C., Guillas, G., Overvad, K., Tj\u00f8nneland, A., Kaaks, R., Body size and risk of differentiated thyroid carcinomas: findings from the EPIC study (2012) Int. J. Cancer, 131, pp. 1004-1014",
         "Shen, H., Liu, S., Sun, D., Zhang, S., Su, X., Han, Y.S.H., Geographical distribution of drinking-water with high iodine level and association between high iodine level in drinking-water and goitre: a Chinese national investigation (2011) Br. J. Nutr., 106, pp. 243-247",
         "Sprague, B.L., Andersen, S.W., Trentham-Dietz, A., Thyroid cancer incidence and socioeconomic indicators of health care access (2008) Cancer Causes Control, 19, pp. 585-593",
         "Teng, W., Shan, Z., Teng, X., Guan, H., Li, Y., Teng, D., Jin, Y., Chong, W., Effect of iodine intake on thyroid diseases in China (2006) N. Engl. J. Med., 354, pp. 2783-2793",
@@ -178,22 +176,11 @@
         "Zimmermann, M.B., Galetti, V., Iodine intake as a risk factor for thyroid cancer: a comprehensive review of animal and human studies (2015) Thyroid. Res., 8, pp. 1-21"
     ],
     "correspondence_address": "Sun, D.; Center for Endemic Disease Control, Chinese Center for Disease Control and Prevention, Harbin Medical University, Key Lab of Etiology and Epidemiology, Education Bureau of Heilongjiang Province & Ministry of Health (23618504), Harbin Medical UniversityChina; email: hrbmusdj@163.com",
-    "editors": null,
-    "sponsors": null,
     "publisher": "Elsevier B.V.",
-    "conference_name": "",
-    "conference_date": "",
-    "conference_location": "",
-    "conference_code": "",
     "issn": "00489697",
-    "isbn": "",
     "coden": "STEVA",
     "pubmed_id": 28763670,
-    "language_of_original_document": "English",
+    "original_language": "English",
     "abbreviated_source_title": "Sci. Total Environ.",
-    "document_type": "Article",
-    "publication_stage": "Final",
-    "access_type": "",
-    "source": "Scopus",
     "eid": "2-s2.0-85026412413"
 }

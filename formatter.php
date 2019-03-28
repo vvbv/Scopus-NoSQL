@@ -7,7 +7,7 @@
     $fi = new FilesystemIterator($location, FilesystemIterator::SKIP_DOTS);
     $fileCount = iterator_count($fi);
 
-    for ($i=1; $i < ( $fileCount + 1); $i++) { 
+    for ($i=1; $i < ( $fileCount + 1 ); $i++) { 
         $fp = fopen("json/$i.json", "r");
         $input = "";
         while (!feof($fp)){
@@ -42,6 +42,7 @@
         $input = str_replace('"Funding Details":','"funding_details":',$input);
         $input = str_replace('"Funding Text 1":','"funding_text_1":',$input);
         $input = str_replace('"Funding Text 2":','"funding_text_2":',$input);
+        $input = str_replace('"Funding Text 3":','"funding_text_3":',$input);
         $input = str_replace('"References":','"references":',$input);
         $input = str_replace('"Correspondence Address":','"correspondence_address":',$input);
         $input = str_replace('"Editors":','"editors":',$input);
@@ -55,7 +56,7 @@
         $input = str_replace('"ISBN":','"isbn":',$input);
         $input = str_replace('"CODEN":','"coden":',$input);
         $input = str_replace('"PubMed ID":','"pubmed_id":',$input);
-        $input = str_replace('"Language of Original Document":','"language_of_original_document":',$input);
+        $input = str_replace('"Language of Original Document":','"original_language":',$input);
         $input = str_replace('"Abbreviated Source Title":','"abbreviated_source_title":',$input);
         $input = str_replace('"Document Type":','"document_type":',$input);
         $input = str_replace('"Publication Stage":','"publication_stage":',$input);
@@ -66,13 +67,23 @@
 
         $arr_articles = json_decode( $input );
         foreach( $arr_articles as $key => $article ){
-            
+
             $article->author_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->author_keywords) );
             $article->index_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->index_keywords) );
-            $article->references =  array_map( function($in){return trim( $in );} ,explode (";", $article->references) );
-            $article->tradenames =  array_map( function($in){return trim( $in );} ,explode (",", $article->tradenames) );
-            $article->editors = null;
-            $article->sponsors = null;
+            $article->references =  array_map( function($in){return trim( str_replace( "\"", "\\\"" , $in) );} ,explode (";", $article->references) );
+            $article->chemicals_cas =  array_map( function($in){return trim( str_replace( "\"", "\\\"" , $in) );} ,explode (",", $article->chemicals_cas) );
+            $article->tradenames =  array_map( function($in){return trim( str_replace( "\"", "\\\"" , $in) );} ,explode (",", $article->tradenames) );
+            $article->abstract = str_replace( "\"", "\\\"", $article->abstract );
+            $article->title = str_replace( "\"", "\\\"", $article->title );
+            $article->source_title = str_replace( "\"", "\\\"", $article->source_title );
+            $article->article_no = str_replace( "\"", "\\\"", $article->article_no );
+            $article->doi = str_replace( "\"", "\\\"", $article->doi );
+            $article->link = str_replace( "\"", "\\\"", $article->link );
+            $article->correspondence_address = str_replace( "\"", "\\\"", $article->correspondence_address );
+            $article->publisher = str_replace( "\"", "\\\"", $article->publisher );
+            $article->coden = str_replace( "\"", "\\\"", $article->coden );
+            $article->abbreviated_source_title = str_replace( "\"", "\\\"", $article->abbreviated_source_title );
+
 
             $authors = explode (",", $article->authors);  
             $authors_id = explode (";", $article->authors_id);
@@ -89,9 +100,9 @@
                     $affiliation = $affiliations[ $key ];
                 }
                 $merged_author = [
-                    'name' => $author,
-                    'id' => $id,
-                    'affiliation' => $affiliation
+                    'name' => trim($author),
+                    'id' => trim($id),
+                    'affiliation' => trim($affiliation)
                 ];
                 array_push( $authors_with_id, $merged_author );
             }
@@ -99,6 +110,27 @@
             unset($article->affiliations);
             unset($article->authors_with_affiliations);
             $article->authors = $authors_with_id;
+            
+            //unused items removed
+            unset($article->manufacturers);
+            unset($article->funding_details);
+            unset($article->funding_text_1);
+            unset($article->funding_text_2);
+            unset($article->funding_text_3);
+            unset($article->editors);
+            unset($article->sponsors);
+            unset($article->conference_name);
+            unset($article->conference_date);
+            unset($article->conference_location);
+            unset($article->conference_code);
+            unset($article->isbn);
+            unset($article->access_type);
+            unset($article->page_count);
+            unset($article->molecular_sequence_numbers);
+            unset($article->document_type);
+            unset($article->publication_stage);
+            unset($article->source);
+
             $mongo_dataset .= json_encode( $article ) . "\n" ;
             array_push( $merged_articles, $article );
         }
