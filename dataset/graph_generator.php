@@ -230,7 +230,7 @@
                 $subject = "<" . $local_objects . "author/" . $fname . ">";
                 $subject_name = str_replace( "'", "\\'", $author['name'] );
                 $subject_id = $author['id'];
-                $subject_affiliation = preg_replace("/[\n\r]/", "", $author['affiliation'] );
+                $subject_affiliation = preg_replace("/[\n\r]/",  str_replace( "'", "\\'", $author['affiliation'] ) );
                 $object_affiliation = preg_replace("/[^a-zA-Z0-9]+/", "", $subject_affiliation);
 
                 if( !is_numeric( $subject_id ) ){
