@@ -203,7 +203,7 @@ initialize_virtuoso_directory()
 		#
 		#  Create an initial database
 		#
-		$VIRTUOSO +checkpoint-only +pwdold dba +pwddba "$DBA_PASSWORD" +pwddav "$DAV_PASSWORD"
+		$VIRTUOSO +checkpoint-only +wait +pwdold dba +pwddba "$DBA_PASSWORD" +pwddav "$DAV_PASSWORD"
 
 		#
 		#  Process any initdb.d scripts (TODO)
@@ -225,8 +225,7 @@ shift
 case $CMD in
 	start)
 		initialize_virtuoso_directory
-
-		exec $VIRTUOSO
+		exit 0
 		;;
 
 	stop)
