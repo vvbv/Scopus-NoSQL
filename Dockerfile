@@ -17,4 +17,5 @@ WORKDIR /dataset/
 RUN php -f /tools/graph_generator.php
 WORKDIR /
 ENTRYPOINT [ "/entrypoint/general_entrypoint.sh" ]
+
 CMD /bin/bash
