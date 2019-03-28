@@ -1,6 +1,8 @@
 <?php 
     require( "formatter.php" );
 
+    $general_graph = "";
+
     $local_objects = "http://127.0.0.1/objects/";
     $local_terms = "http://127.0.0.1/terms/";
     $local_groups = "http://127.0.0.1/groups/";
@@ -23,7 +25,7 @@
             $title =
                 $base . $subject . " " . 
                 "<" . $local_terms . "title" . ">" . " " . 
-                "\"" . $article->title . "\"" . ".};\n";
+                "'" . $article->title . "'" . ".};\n";
             
             $year =
                 $base . $subject . " " . 
@@ -33,73 +35,73 @@
             $source_title =
                 $base . $subject . " " . 
                 "<" . $local_terms . "source_title" . ">" . " " . 
-                "\"" . $article->source_title . "\"" . ".};\n";
+                "'" . $article->source_title . "'" . ".};\n";
             
             $volume =
                 $base . $subject . " " . 
                 "<" . $local_terms . "volume" . ">" . " " . 
-                "\"" . $article->volume . "\"" .  ".};\n";
+                "'" . $article->volume . "'" .  ".};\n";
             
             
             $issue =
                 $base . $subject . " " . 
                 "<" . $local_terms . "issue" . ">" . " " . 
-                "\"" . $article->issue . "\"" . ".};\n";
+                "'" . $article->issue . "'" . ".};\n";
             
             $article_no =
                 $base . $subject . " " . 
                 "<" . $local_terms . "article_no" . ">" . " " . 
-                "\"" . $article->article_no . "\"" . ".};\n";
+                "'" . $article->article_no . "'" . ".};\n";
             
             $page_start =
                 $base . $subject . " " . 
                 "<" . $local_terms . "page_start" . ">" . " " . 
-                "\"" . $article->page_start . "\"" . ".};\n";
+                "'" . $article->page_start . "'" . ".};\n";
             
             $page_end =
                 $base . $subject . " " . 
                 "<" . $local_terms . "page_end" . ">" . " " . 
-                "\"" . $article->page_end . "\"" . ".};\n";
+                "'" . $article->page_end . "'" . ".};\n";
             
             $cited_by =
                 $base . $subject . " " . 
                 "<" . $local_terms . "cited_by" . ">" . " " . 
-                "\"" . $article->cited_by . "\"" . ".};\n";
+                "'" . $article->cited_by . "'" . ".};\n";
             
             $doi =
                 $base . $subject . " " . 
                 "<" . $local_terms . "doi" . ">" . " " . 
-                "\"" . $article->doi . "\"" . ".};\n";
+                "'" . $article->doi . "'" . ".};\n";
             
             $link =
                 $base . $subject . " " . 
                 "<" . $local_terms . "link" . ">" . " " . 
-                "\"" . $article->link . "\"" . ".};\n";
+                "'" . $article->link . "'" . ".};\n";
             
             $abstract =
                 $base . $subject . " " . 
                 "<" . $local_terms . "abstract" . ">" . " " . 
-                "\"" . $article->abstract . "\"" . ".};\n";
+                "'" . $article->abstract . "'" . ".};\n";
             
             $correspondence_address =
                 $base . $subject . " " . 
                 "<" . $local_terms . "correspondence_address" . ">" . " " . 
-                "\"" . $article->correspondence_address . "\"" . ".};\n";
+                "'" . $article->correspondence_address . "'" . ".};\n";
             
             $publisher =
                 $base . $subject . " " . 
                 "<" . $local_terms . "publisher" . ">" . " " . 
-                "\"" . $article->publisher . "\"" . ".};\n";
+                "'" . $article->publisher . "'" . ".};\n";
             
             $issn =
                 $base . $subject . " " . 
                 "<" . $local_terms . "issn" . ">" . " " . 
-                "\"" . $article->issn . "\"" . ".};\n";
+                "'" . $article->issn . "'" . ".};\n";
             
             $coden =
                 $base . $subject . " " . 
                 "<" . $local_terms . "coden" . ">" . " " . 
-                "\"" . $article->coden . "\"" . ".};\n";
+                "'" . $article->coden . "'" . ".};\n";
             
             $pubmed_id = "";
 
@@ -113,24 +115,24 @@
             $original_language =
                 $base . $subject . " " . 
                 "<" . $local_terms . "original_language" . ">" . " " . 
-                "\"" . $article->original_language . "\"" . ".};\n";
+                "'" . $article->original_language . "'" . ".};\n";
             
             $abbreviated_source_title =
                 $base . $subject . " " . 
                 "<" . $local_terms . "abbreviated_source_title" . ">" . " " . 
-                "\"" . $article->abbreviated_source_title . "\"" . ".};\n";
+                "'" . $article->abbreviated_source_title . "'" . ".};\n";
             
             $eid =
                 $base . $subject . " " . 
                 "<" . $local_terms . "eid" . ">" . " " . 
-                "\"" . $article->eid . "\"" . ".};\n";
+                "'" . $article->eid . "'" . ".};\n";
             
             $ScopusArticle =
                 $base . $subject . " " . 
                 $rdf_type . " " . 
                 "<" . $local_objects . "ScopusArticle" . ">" . ".};\n";
             
-            echo $title  . 
+            $general_graph .= $title  . 
             $year .
             $source_title  . 
             $volume  . 
@@ -160,11 +162,11 @@
             $list = $base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->author_keywords as $key => $value) {
-                $list .= "\"" . $value . "\" ";
+                $list .= "'" . $value . "' ";
             }
 
             $list .= ").};\n";
-            echo $list;
+            $general_graph .=  $list;
         }
 
         //Block: index_keywords
@@ -173,11 +175,11 @@
             $list = $base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->index_keywords as $key => $value) {
-                $list .= "\"" . $value . "\" ";
+                $list .= "'" . $value . "' ";
             }
 
             $list .= ").};\n";
-            echo $list;
+            $general_graph .=  $list;
         }
 
         //Block: chemicals_cas
@@ -186,11 +188,11 @@
             $list = $base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->chemicals_cas as $key => $value) {
-                $list .= "\"" . $value . "\" ";
+                $list .= "'" . $value . "' ";
             }
 
             $list .= ").};\n";
-            echo $list;
+            $general_graph .=  $list;
         }
 
         //Block: tradenames
@@ -199,11 +201,11 @@
             $list = $base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->tradenames as $key => $value) {
-                $list .= "\"" . $value . "\" ";
+                $list .= "'" . $value . "' ";
             }
 
             $list .= ").};\n";
-            echo $list;
+            $general_graph .=  $list;
         }
 
         //Block: references
@@ -212,11 +214,11 @@
             $list = $base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->references as $key => $value) {
-                $list .= "\"" . $value . "\" ";
+                $list .= "'" . $value . "' ";
             }
 
             $list .= ").};\n";
-            echo $list;
+            $general_graph .=  $list;
         }
         
         //Block: author information
@@ -226,10 +228,14 @@
                 $fname = preg_replace("/[^a-zA-Z0-9]+/", "", str_replace( " ", "_",  str_replace( ".", "", $author['name'] ) ) );
 
                 $subject = "<" . $local_objects . "author/" . $fname . ">";
-                $subject_name = str_replace( "\"", "\\\"", $author['name'] );
+                $subject_name = str_replace( "'", "\\'", $author['name'] );
                 $subject_id = $author['id'];
-                $subject_affiliation = str_replace( "\"", "\\\"", $author['affiliation'] );
+                $subject_affiliation = preg_replace("/[\n\r]/", "",  str_replace( "'", "\\'", $author['affiliation'] ) );
                 $object_affiliation = preg_replace("/[^a-zA-Z0-9]+/", "", $subject_affiliation);
+
+                if( !is_numeric( $subject_id ) ){
+                    $subject_id = null;
+                }
 
                 $type_person = 
                     $base . $subject . " " . 
@@ -244,27 +250,36 @@
                 $foaf_name = 
                     $base .$subject . " " . 
                     "<" . $foaf . "name" . ">" . " " . 
-                    "\"" .  $author['name'] . "\"" . ".};\n";
+                    "'" .  $author['name'] . "'" . ".};\n";
                 
-                $foaf_account = 
-                    $base .$subject . " " . 
-                    "<" . $foaf . "account" . ">" . " " . 
-                    "<" . $local_objects . $author['id'] . ">" . ".};\n";
+                $foaf_account = null;
+                if( $subject_id ){
+                    $foaf_account = 
+                        $base .$subject . " " . 
+                        "<" . $foaf . "account" . ">" . " " . 
+                        "<" . $local_objects . $subject_id . ">" . ".};\n";
+                }
                 
-                $foaf_account_name = 
-                    $base ."<" . $local_objects . $author['id'] . ">" . " " . 
-                    "<" . $foaf . "accountName" . ">" . " " . 
-                    $subject_id . ".};\n";
+                $foaf_account_name = null;
+                if( $subject_id ){
+                    $foaf_account_name = 
+                        $base ."<" . $local_objects . $author['id'] . ">" . " " . 
+                        "<" . $foaf . "accountName" . ">" . " " . 
+                        $subject_id . ".};\n";
+                }
                 
-                $foaf_account_service_homepage = 
-                    $base ."<" . $local_objects . $author['id'] . ">" . " " . 
-                    "<" . $foaf . "accountServiceHomepage" . ">" . " " . 
-                    "\"https://www.scopus.com/\"" . ".};\n";
+                $foaf_account_service_homepage = null;
+                if( $subject_id ){
+                    $foaf_account_service_homepage = 
+                        $base ."<" . $local_objects . $subject_id . ">" . " " . 
+                        "<" . $foaf . "accountServiceHomepage" . ">" . " " . 
+                        "'https://www.scopus.com/'" . ".};\n";
+                }
 
                 $foaf_group = 
                     $base ."<" . $local_groups . $object_affiliation . ">" . " " . 
                     "<" . $foaf . "name" . ">" . " " . 
-                    "\"" . $subject_affiliation . "\"" . ".};\n";
+                    "'" . $subject_affiliation . "'" . ".};\n";
                 
                 $foaf_group_type = 
                     $base ."<" . $local_groups . $object_affiliation . ">" . " " . 
@@ -276,7 +291,7 @@
                     "<" . $foaf . "member" . ">" . " " . 
                     $subject . ".};\n";
 
-                echo $type_person  . 
+                $general_graph .=  $type_person  . 
                 $written_by .
                 $foaf_name  . 
                 $foaf_account  . 
@@ -288,8 +303,10 @@
 
             }
         }
-
     }
+
+    $file = 'graph.rq';
+    file_put_contents( $file, $general_graph );
 
 
 ?>

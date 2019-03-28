@@ -14,7 +14,8 @@ COPY general_entrypoint.sh /entrypoint/general_entrypoint.sh
 COPY virtuoso_entrypoint.sh /entrypoint/virtuoso_entrypoint.sh
 
 WORKDIR /dataset/
-RUN php -f /tools/graph_generator.php > graph.rq
+RUN php -f /tools/graph_generator.php
 WORKDIR /
 ENTRYPOINT [ "/entrypoint/general_entrypoint.sh" ]
+
 CMD /bin/bash

@@ -68,21 +68,21 @@
         $arr_articles = json_decode( $input );
         foreach( $arr_articles as $key => $article ){
 
-            $article->author_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->author_keywords) );
-            $article->index_keywords =  array_map( function($in){return trim( $in );} ,explode (";", $article->index_keywords) );
-            $article->references =  array_map( function($in){return trim( str_replace( "\"", "\\\"" , $in) );} ,explode (";", $article->references) );
-            $article->chemicals_cas =  array_map( function($in){return trim( str_replace( "\"", "\\\"" , $in) );} ,explode (",", $article->chemicals_cas) );
-            $article->tradenames =  array_map( function($in){return trim( str_replace( "\"", "\\\"" , $in) );} ,explode (",", $article->tradenames) );
-            $article->abstract = str_replace( "\"", "\\\"", $article->abstract );
-            $article->title = str_replace( "\"", "\\\"", $article->title );
-            $article->source_title = str_replace( "\"", "\\\"", $article->source_title );
-            $article->article_no = str_replace( "\"", "\\\"", $article->article_no );
-            $article->doi = str_replace( "\"", "\\\"", $article->doi );
-            $article->link = str_replace( "\"", "\\\"", $article->link );
-            $article->correspondence_address = str_replace( "\"", "\\\"", $article->correspondence_address );
-            $article->publisher = str_replace( "\"", "\\\"", $article->publisher );
-            $article->coden = str_replace( "\"", "\\\"", $article->coden );
-            $article->abbreviated_source_title = str_replace( "\"", "\\\"", $article->abbreviated_source_title );
+            $article->author_keywords =  array_map( function($in){return trim( addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $in ) ) ) ) );} ,explode (";", $article->author_keywords) );
+            $article->index_keywords =  array_map( function($in){return trim( addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $in ) ) ) ) );} ,explode (";", $article->index_keywords) );
+            $article->references =  array_map( function($in){return trim( addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $in ) ) ) ) );} ,explode (";", $article->references) );
+            $article->chemicals_cas =  array_map( function($in){return trim( addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $in ) ) ) ) ) ;} ,explode (",", $article->chemicals_cas) );
+            $article->tradenames =  array_map( function($in){return trim( addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $in ) ) ) ) );} ,explode (",", $article->tradenames) );
+            $article->abstract = addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $article->abstract ) ) ) );
+            $article->title = addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $article->title ) ) ) );
+            $article->source_title = addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $article->source_title ) ) ) );
+            $article->article_no = addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $article->article_no ) ) ) );
+            $article->doi = addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $article->doi ) ) ) );
+            $article->link = addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $article->link ) ) ) );
+            $article->correspondence_address = addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $article->correspondence_address ) ) ) );
+            $article->publisher = addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $article->publisher ) ) ) );
+            $article->coden = addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $article->coden ) ) ) );
+            $article->abbreviated_source_title = addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $article->abbreviated_source_title ) ) ) );
 
 
             $authors = explode (",", $article->authors);  
@@ -100,7 +100,7 @@
                     $affiliation = $affiliations[ $key ];
                 }
                 $merged_author = [
-                    'name' => trim($author),
+                    'name' => trim( addslashes( utf8_encode(  str_replace( "'", "", str_replace( "$", "DOLLAR_SYM", $author ) ) ) ) ),
                     'id' => trim($id),
                     'affiliation' => trim($affiliation)
                 ];
