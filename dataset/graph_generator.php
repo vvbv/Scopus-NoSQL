@@ -233,6 +233,10 @@
                 $subject_affiliation = str_replace( "'", "\\'", $author['affiliation'] );
                 $object_affiliation = preg_replace("/[^a-zA-Z0-9]+/", "", $subject_affiliation);
 
+                if( !is_numeric( $subject_id ) ){
+                    $subject_id = null;
+                }
+
                 $type_person = 
                     $base . $subject . " " . 
                     $rdf_type . " " . 
