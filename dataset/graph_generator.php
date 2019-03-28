@@ -252,10 +252,13 @@
                     "<" . $foaf . "name" . ">" . " " . 
                     "'" .  $author['name'] . "'" . ".};\n";
                 
-                $foaf_account = 
-                    $base .$subject . " " . 
-                    "<" . $foaf . "account" . ">" . " " . 
-                    "<" . $local_objects . $author['id'] . ">" . ".};\n";
+                $foaf_account = null;
+                if( $subject_id ){
+                    $foaf_account = 
+                        $base .$subject . " " . 
+                        "<" . $foaf . "account" . ">" . " " . 
+                        "<" . $local_objects . $subject_id . ">" . ".};\n";
+                }
                 
                 $foaf_account_name = null;
                 if( $subject_id ){
@@ -265,10 +268,13 @@
                         $subject_id . ".};\n";
                 }
                 
-                $foaf_account_service_homepage = 
-                    $base ."<" . $local_objects . $author['id'] . ">" . " " . 
-                    "<" . $foaf . "accountServiceHomepage" . ">" . " " . 
-                    "'https://www.scopus.com/'" . ".};\n";
+                $foaf_account_service_homepage = null;
+                if( $subject_id ){
+                    $foaf_account_service_homepage = 
+                        $base ."<" . $local_objects . $subject_id . ">" . " " . 
+                        "<" . $foaf . "accountServiceHomepage" . ">" . " " . 
+                        "'https://www.scopus.com/'" . ".};\n";
+                }
 
                 $foaf_group = 
                     $base ."<" . $local_groups . $object_affiliation . ">" . " " . 
