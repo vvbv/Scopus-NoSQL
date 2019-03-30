@@ -1,16 +1,41 @@
 <?php 
     require( "formatter.php" );
 
-    $general_graph = "";
+    function local_objects($in){
+        return "<http://127.0.0.1/objects/$in>";
+    };
+    function local_terms($in){
+        return "<http://127.0.0.1/terms/$in>";
+    };
+    function local_groups($in){
+        return "<http://127.0.0.1/groups/$in>";
+    };
+    function foaf($in){
+        return "<http://xmlns.com/foaf/0.1/$in>";
+    };
+    function rdf($in){
+        return "<http://www.w3.org/1999/02/22-rdf-syntax-ns#$in>";
+    };
+    function literal($in){
+        return ( ( gettype($in) === "string" ) ? "'$in'" : $in );
+    }
 
-    $local_objects = "http://127.0.0.1/objects/";
-    $local_terms = "http://127.0.0.1/terms/";
-    $local_groups = "http://127.0.0.1/groups/";
-    $foaf = "http://xmlns.com/foaf/0.1/";
-    $rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+    $sparql_base = "SPARQL INSERT INTO <articles_metadata> {";
 
-    $rdf_type = "<" . $rdf . "type" . ">";
-    $base = "SPARQL INSERT INTO <articles_metadata> {";
+    function generate_triple( $subject, $predicate, $object ){
+        return ( ($subject && $object) ? $subject." ".$predicate." ".$object."." : null );
+    }
+
+    function generate_sparql_insert( $triple ){
+        return ( ($triple) ? $sparql_base.$triple."}\n" : null );
+    }
+
+    $sparql_queries = "";
+    $triples = "";
+
+    function add_to_sparql_queries( $triple ){
+        ( $triple ? $sparql_queries .= generate_sparql_insert( $triple ) : null );
+    };
 
     //formatter: $merged_articles
     foreach( $merged_articles as $key => $article ){
@@ -22,203 +47,115 @@
             
             $subject = "<" . $local_objects . "article/" . $articleFname . ">";
 
-            $title =
-                $base . $subject . " " . 
-                "<" . $local_terms . "title" . ">" . " " . 
-                "'" . $article->title . "'" . ".};\n";
+            $title = generate_triple($subject, local_terms("title"), literal( $article->title ) );
+            $year = generate_triple($subject, local_terms("year"), literal( $article->year ) );
+            $source_title = generate_triple($subject, local_terms("source_title"), literal( $article->source_title ) );
+            $volume = generate_triple($subject, local_terms("volume"), literal( $article->volume  ));
+            $issue = generate_triple($subject, local_terms("issue"), literal( $article->issue  ));
+            $article_no = generate_triple($subject, local_terms("article_no"), literal( $article->article_no  ) );
+            $page_start = generate_triple($subject, local_terms("page_start"), literal( $article->page_start  ) );
+            $page_end = generate_triple($subject, local_terms("page_end"), literal( $article->page_end  ) );
+            $cited_by = generate_triple($subject, local_terms("cited_by"), literal( $article->cited_by  ) );
+            $doi = generate_triple($subject, local_terms("doi"), literal( $article->doi  ) );
+            $link = generate_triple($subject, local_terms("link"), literal( $article->link  ) );
+            $abstract = generate_triple($subject, local_terms("abstract"), literal( $article->abstract  ) );
+            $correspondence_address = generate_triple($subject, local_terms("correspondence_address"), literal( $article->correspondence_address  ) );
+            $publisher = generate_triple($subject, local_terms("publisher"), literal( $article->publisher  ) ); //_b:
+            $issn = generate_triple($subject, local_terms("issn"), literal( $article->issn  ) );
+            $coden = generate_triple($subject, local_terms("coden"), literal( $article->coden  ) );
+            $pubmed_id = generate_triple($subject, local_terms("pubmed_id"), literal( $article->pubmed_id  ) );
+            $original_language = generate_triple($subject, local_terms("original_language"), literal( $article->original_language  ) );
+            $abbreviated_source_title = generate_triple($subject, local_terms("abbreviated_source_title"), literal( $article->abbreviated_source_title  ) );
+            $eid = generate_triple($subject, local_terms("eid"), literal( $article->eid  ) );
+            $ScopusArticle = generate_triple($subject, rdf("type"), local_objects( "ScopusArticle"  ) );
             
-            $year =
-                $base . $subject . " " . 
-                "<" . $local_terms . "year" . ">" . " " . 
-                $article->year . ".};\n";
-            
-            $source_title =
-                $base . $subject . " " . 
-                "<" . $local_terms . "source_title" . ">" . " " . 
-                "'" . $article->source_title . "'" . ".};\n";
-            
-            $volume =
-                $base . $subject . " " . 
-                "<" . $local_terms . "volume" . ">" . " " . 
-                "'" . $article->volume . "'" .  ".};\n";
-            
-            
-            $issue =
-                $base . $subject . " " . 
-                "<" . $local_terms . "issue" . ">" . " " . 
-                "'" . $article->issue . "'" . ".};\n";
-            
-            $article_no =
-                $base . $subject . " " . 
-                "<" . $local_terms . "article_no" . ">" . " " . 
-                "'" . $article->article_no . "'" . ".};\n";
-            
-            $page_start =
-                $base . $subject . " " . 
-                "<" . $local_terms . "page_start" . ">" . " " . 
-                "'" . $article->page_start . "'" . ".};\n";
-            
-            $page_end =
-                $base . $subject . " " . 
-                "<" . $local_terms . "page_end" . ">" . " " . 
-                "'" . $article->page_end . "'" . ".};\n";
-            
-            $cited_by =
-                $base . $subject . " " . 
-                "<" . $local_terms . "cited_by" . ">" . " " . 
-                "'" . $article->cited_by . "'" . ".};\n";
-            
-            $doi =
-                $base . $subject . " " . 
-                "<" . $local_terms . "doi" . ">" . " " . 
-                "'" . $article->doi . "'" . ".};\n";
-            
-            $link =
-                $base . $subject . " " . 
-                "<" . $local_terms . "link" . ">" . " " . 
-                "'" . $article->link . "'" . ".};\n";
-            
-            $abstract =
-                $base . $subject . " " . 
-                "<" . $local_terms . "abstract" . ">" . " " . 
-                "'" . $article->abstract . "'" . ".};\n";
-            
-            $correspondence_address =
-                $base . $subject . " " . 
-                "<" . $local_terms . "correspondence_address" . ">" . " " . 
-                "'" . $article->correspondence_address . "'" . ".};\n";
-            
-            $publisher =
-                $base . $subject . " " . 
-                "<" . $local_terms . "publisher" . ">" . " " . 
-                "'" . $article->publisher . "'" . ".};\n";
-            
-            $issn =
-                $base . $subject . " " . 
-                "<" . $local_terms . "issn" . ">" . " " . 
-                "'" . $article->issn . "'" . ".};\n";
-            
-            $coden =
-                $base . $subject . " " . 
-                "<" . $local_terms . "coden" . ">" . " " . 
-                "'" . $article->coden . "'" . ".};\n";
-            
-            $pubmed_id = "";
-
-            if( $article->pubmed_id ){
-                $pubmed_id =
-                    $base . $subject . " " . 
-                    "<" . $local_terms . "pubmed_id" . ">" . " " . 
-                    $article->pubmed_id . ".};\n";
-            }
-            
-            $original_language =
-                $base . $subject . " " . 
-                "<" . $local_terms . "original_language" . ">" . " " . 
-                "'" . $article->original_language . "'" . ".};\n";
-            
-            $abbreviated_source_title =
-                $base . $subject . " " . 
-                "<" . $local_terms . "abbreviated_source_title" . ">" . " " . 
-                "'" . $article->abbreviated_source_title . "'" . ".};\n";
-            
-            $eid =
-                $base . $subject . " " . 
-                "<" . $local_terms . "eid" . ">" . " " . 
-                "'" . $article->eid . "'" . ".};\n";
-            
-            $ScopusArticle =
-                $base . $subject . " " . 
-                $rdf_type . " " . 
-                "<" . $local_objects . "ScopusArticle" . ">" . ".};\n";
-            
-            $general_graph .= $title  . 
-            $year .
-            $source_title  . 
-            $volume  . 
-            $issue  . 
-            $article_no . 
-            $page_start  . 
-            $page_end  . 
-            $cited_by  . 
-            $doi  . 
-            $link  . 
-            $abstract  . 
-            $correspondence_address  . 
-            $publisher  . 
-            $issn  . 
-            $coden  . 
-            $pubmed_id  . 
-            $original_language  . 
-            $abbreviated_source_title . 
-            $eid . 
-            $ScopusArticle;    
+            add_to_sparql_queries($title);
+            add_to_sparql_queries($year);
+            add_to_sparql_queries($source_title);
+            add_to_sparql_queries($volume);
+            add_to_sparql_queries($issue);
+            add_to_sparql_queries($article_no);
+            add_to_sparql_queries($page_start);
+            add_to_sparql_queries($page_end);
+            add_to_sparql_queries($cited_by);
+            add_to_sparql_queries($doi);
+            add_to_sparql_queries($link);
+            add_to_sparql_queries($abstract);
+            add_to_sparql_queries($correspondence_address);
+            add_to_sparql_queries($publisher);
+            add_to_sparql_queries($issn);
+            add_to_sparql_queries($coden);
+            add_to_sparql_queries($pubmed_id);
+            add_to_sparql_queries($original_language);
+            add_to_sparql_queries($abbreviated_source_title);
+            add_to_sparql_queries($eid);
+            add_to_sparql_queries($ScopusArticle);
             
         }
 
         //Block: author_keywords
         {
             $subject = "<" . $local_objects . "article/" . $articleFname . ">";
-            $list = $base . $subject . " " . "rdf:list" . " (";
+            $list = $sparql_base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->author_keywords as $key => $value) {
-                $list .= "'" . $value . "' ";
+                $list .= literal( $value ). " ";
             }
 
             $list .= ").};\n";
-            $general_graph .=  $list;
+            $sparql_queries .=  $list;
         }
 
         //Block: index_keywords
         {
             $subject = "<" . $local_objects . "article/" . $articleFname . ">";
-            $list = $base . $subject . " " . "rdf:list" . " (";
+            $list = $sparql_base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->index_keywords as $key => $value) {
-                $list .= "'" . $value . "' ";
+                $list .= literal( $value ) . " ";
             }
 
             $list .= ").};\n";
-            $general_graph .=  $list;
+            $sparql_queries .=  $list;
         }
 
         //Block: chemicals_cas
         {
             $subject = "<" . $local_objects . "article/" . $articleFname . ">";
-            $list = $base . $subject . " " . "rdf:list" . " (";
+            $list = $sparql_base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->chemicals_cas as $key => $value) {
-                $list .= "'" . $value . "' ";
+                $list .= literal( $value ) . " ";
             }
 
             $list .= ").};\n";
-            $general_graph .=  $list;
+            $sparql_queries .=  $list;
         }
 
         //Block: tradenames
         {
             $subject = "<" . $local_objects . "article/" . $articleFname . ">";
-            $list = $base . $subject . " " . "rdf:list" . " (";
+            $list = $sparql_base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->tradenames as $key => $value) {
-                $list .= "'" . $value . "' ";
+                $list .= literal( $value ) . " ";
             }
 
             $list .= ").};\n";
-            $general_graph .=  $list;
+            $sparql_queries .=  $list;
         }
 
         //Block: references
         {
             $subject = "<" . $local_objects . "article/" . $articleFname . ">";
-            $list = $base . $subject . " " . "rdf:list" . " (";
+            $list = $sparql_base . $subject . " " . "rdf:list" . " (";
 
             foreach ($article->references as $key => $value) {
-                $list .= "'" . $value . "' ";
+                $list .= literal( $value ) . " ";
             }
 
             $list .= ").};\n";
-            $general_graph .=  $list;
+            $sparql_queries .=  $list;
         }
         
         //Block: author information
@@ -238,24 +175,24 @@
                 }
 
                 $type_person = 
-                    $base . $subject . " " . 
+                    $sparql_base . $subject . " " . 
                     $rdf_type . " " . 
                     "<" .  $foaf . "Person" . ">" . ".};\n"; 
                 
                 $written_by =
-                    $base . "<" . $local_objects . "article/" . $articleFname . ">" . " " . 
+                    $sparql_base . "<" . $local_objects . "article/" . $articleFname . ">" . " " . 
                     "<" . $local_terms . "written_by" . ">" . " " . 
                     $subject . ".};\n";
                     
                 $foaf_name = 
-                    $base .$subject . " " . 
+                    $sparql_base .$subject . " " . 
                     "<" . $foaf . "name" . ">" . " " . 
-                    "'" .  $author['name'] . "'" . ".};\n";
+                    literal( $author['name']  ) . ".};\n";
                 
                 $foaf_account = null;
                 if( $subject_id ){
                     $foaf_account = 
-                        $base .$subject . " " . 
+                        $sparql_base .$subject . " " . 
                         "<" . $foaf . "account" . ">" . " " . 
                         "<" . $local_objects . $subject_id . ">" . ".};\n";
                 }
@@ -263,7 +200,7 @@
                 $foaf_account_name = null;
                 if( $subject_id ){
                     $foaf_account_name = 
-                        $base ."<" . $local_objects . $author['id'] . ">" . " " . 
+                        $sparql_base ."<" . $local_objects . $author['id'] . ">" . " " . 
                         "<" . $foaf . "accountName" . ">" . " " . 
                         $subject_id . ".};\n";
                 }
@@ -271,27 +208,27 @@
                 $foaf_account_service_homepage = null;
                 if( $subject_id ){
                     $foaf_account_service_homepage = 
-                        $base ."<" . $local_objects . $subject_id . ">" . " " . 
+                        $sparql_base ."<" . $local_objects . $subject_id . ">" . " " . 
                         "<" . $foaf . "accountServiceHomepage" . ">" . " " . 
                         "'https://www.scopus.com/'" . ".};\n";
                 }
 
                 $foaf_group = 
-                    $base ."<" . $local_groups . $object_affiliation . ">" . " " . 
+                    $sparql_base ."<" . $local_groups . $object_affiliation . ">" . " " . 
                     "<" . $foaf . "name" . ">" . " " . 
-                    "'" . $subject_affiliation . "'" . ".};\n";
+                    literal( $subject_affiliation  ) . ".};\n";
                 
                 $foaf_group_type = 
-                    $base ."<" . $local_groups . $object_affiliation . ">" . " " . 
+                    $sparql_base ."<" . $local_groups . $object_affiliation . ">" . " " . 
                     $rdf_type . " " . 
                     "<" . $foaf . "group" . ">" . ".};\n";
 
                 $foaf_member = 
-                    $base ."<" . $local_groups . $object_affiliation . ">" . " " . 
+                    $sparql_base ."<" . $local_groups . $object_affiliation . ">" . " " . 
                     "<" . $foaf . "member" . ">" . " " . 
                     $subject . ".};\n";
 
-                $general_graph .=  $type_person  . 
+                $sparql_queries .=  $type_person  . 
                 $written_by .
                 $foaf_name  . 
                 $foaf_account  . 
@@ -306,7 +243,7 @@
     }
 
     $file = 'graph.rq';
-    file_put_contents( $file, $general_graph );
+    file_put_contents( $file, $sparql_queries );
 
 
 ?>
