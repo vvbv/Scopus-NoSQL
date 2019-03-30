@@ -3,7 +3,7 @@
     require( "formatter.php" );
     
     function generate_object( $iri_base, $in ){
-        return ( $in ? "<".$iri_base.$in.">" : null );
+        return ( ($in && ($in != "''")) ? "<".$iri_base.$in.">" : null );
     }
 
     function local_objects( $in )       { return generate_object( "http://127.0.0.1/objects/" , $in ); };
@@ -11,7 +11,7 @@
     function local_groups( $in )        { return generate_object( "http://127.0.0.1/http://127.0.0.1/groups/" , $in ); };
     function foaf( $in )                { return generate_object( "http://127.0.0.1/http://xmlns.com/foaf/0.1/" , $in ); };
     function rdf( $in )                 { return generate_object( "http://127.0.0.1/http://www.w3.org/1999/02/22-rdf-syntax-ns#" , $in ); };
-    function literal( $in )             { return ( ( gettype( $in ) === "string" ) ? "'$in'" : $in ); };
+    function literal( $in )             { return ( ( $in && ( $in != "''" ) ) ? ( ( gettype( $in ) === "string" ) ? "'$in'" : $in ) : null); };
     function generate_blank_node_id()   { return substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20); };
 
     function generate_triple( $subject, $predicate, $object ){
@@ -19,38 +19,46 @@
     }
 
     function generate_sparql_insert( $triple ){
-        return ( ($triple) ? "SPARQL INSERT INTO <articles_metadata> {".$triple."}\n" : null );
+        return ( $triple ? "SPARQL INSERT INTO <articles_metadata> {".$triple."}\n" : null );
     }
 
     $sparql_queries = "";
     $triples = "";
 
     function add_to_sparql_queries( $triple ){
+        global $sparql_queries;
         $query = generate_sparql_insert( $triple );
-        ( $triple ? $sparql_queries .= $sparql_queries.=$query : null );
+        ( $triple ? $sparql_queries .= $query : null );
         return $query;
     };
 
     function add_to_triples( $subject, $predicate, $object ){
+        global $triples;
         $triple = generate_triple( $subject, $predicate, $object );
+        ( $triple ? $triples.= $triple . "\n" : null );
+        return $triple;
+    }
+
+    function add_to_triples_from_string( $triple ){
+        global $triples;
         ( $triple ? $triples.= $triple . "\n" : null );
         return $triple;
     }
 
     function generate_list( $blank_node_id, $values ){
         $list_triples = [];
-        array_push( generate_triple( $blank_node_id, rdf("type"), rdf( "list" ) ), $list_triples );
+        array_push( $list_triples, generate_triple( $blank_node_id, rdf("type"), rdf( "list" ) ) );
         
         $values = array_filter( $values );
         $last_key = count($values) - 1;
         foreach( $values as $key => $value){
-            array_push( generate_triple( $blank_node_id, rdf("first"), literal( $value ) ), $list_triples );
+            array_push( $list_triples, generate_triple( $blank_node_id, rdf("first"), literal( $value ) ) );
             if( $key !== $last_key ){
                 $next_blank_node_id = generate_blank_node_id();
-                array_push( generate_triple( $blank_node_id, rdf("rest"), $next_blank_node_id ), $list_triples );
+                array_push( $list_triples, generate_triple( $blank_node_id, rdf("rest"), $next_blank_node_id ) );
                 $blank_node_id = $next_blank_node_id;
             }else{
-                array_push( generate_triple( $blank_node_id, rdf("rest"), rdf("nil") ), $list_triples );
+                array_push( $list_triples, generate_triple( $blank_node_id, rdf("rest"), rdf("nil") ) );
             }
         }
         return $list_triples;
@@ -60,8 +68,8 @@
         $blank_node_id = generate_blank_node_id();
         add_to_triples( $subject, local_terms($term), "_:b$blank_node_id" );
         $triples_list = generate_list( "_:b$blank_node_id", $list );
-        array_map( add_to_triples( $in ), $triples_list );
-        array_map( add_to_sparql_queries( $in ), $triples_list );
+        array_map( "add_to_triples_from_string", $triples_list );
+        array_map( "add_to_sparql_queries", $triples_list );
     }
 
     //formatter.php: $merged_articles
@@ -145,7 +153,7 @@
                 $author = add_to_triples( $subject, rdf("type"), foaf( "Person" ) );
                 $written_by = add_to_triples( local_objects( "article/" . $articleFname ), local_terms("written_by"), $subject );
 
-                $foaf_name = add_to_triples( $subject, foaf("name"), literal( $author['name'] ) );
+                $foaf_name = add_to_triples( $subject, foaf("name"), literal( $subject_name ) );
                 $foaf_account = add_to_triples( $subject, foaf("account"), local_objects( $subject_id ) );
                 $foaf_account_name = add_to_triples( local_objects( $subject_id ), foaf("accountName"), literal( $subject_id ) );
                 $foaf_account_service_homepage = add_to_triples( local_objects( $subject_id ), foaf("accountServiceHomepage"), literal( "https://www.scopus.com/" ) );
