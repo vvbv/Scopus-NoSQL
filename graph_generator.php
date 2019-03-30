@@ -1,16 +1,17 @@
 <?php 
     require( "formatter.php" );
-
+    
     function generate_object( $iri_base, $in ){
         return ( $in ? "<".$iri_base.$in.">" : null );
     }
 
-    function local_objects( $in )   { return generate_object( "http://127.0.0.1/objects/" , $in ); };
-    function local_terms( $in )     { return generate_object( "http://127.0.0.1/http://127.0.0.1/terms/" , $in ); };
-    function local_groups( $in )    { return generate_object( "http://127.0.0.1/http://127.0.0.1/groups/" , $in ); };
-    function foaf( $in )            { return generate_object( "http://127.0.0.1/http://xmlns.com/foaf/0.1/" , $in ); };
-    function rdf( $in )             { return generate_object( "http://127.0.0.1/http://www.w3.org/1999/02/22-rdf-syntax-ns#" , $in ); };
-    function literal( $in )         { return ( ( gettype( $in ) === "string" ) ? "'$in'" : $in ); };
+    function local_objects( $in )       { return generate_object( "http://127.0.0.1/objects/" , $in ); };
+    function local_terms( $in )         { return generate_object( "http://127.0.0.1/http://127.0.0.1/terms/" , $in ); };
+    function local_groups( $in )        { return generate_object( "http://127.0.0.1/http://127.0.0.1/groups/" , $in ); };
+    function foaf( $in )                { return generate_object( "http://127.0.0.1/http://xmlns.com/foaf/0.1/" , $in ); };
+    function rdf( $in )                 { return generate_object( "http://127.0.0.1/http://www.w3.org/1999/02/22-rdf-syntax-ns#" , $in ); };
+    function literal( $in )             { return ( ( gettype( $in ) === "string" ) ? "'$in'" : $in ); };
+    function generate_blank_node_id()   { return substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20); };
 
     function generate_triple( $subject, $predicate, $object ){
         return ( ($subject && $object) ? $subject." ".$predicate." ".$object."." : null );
@@ -24,47 +25,74 @@
     $triples = "";
 
     function add_to_sparql_queries( $triple ){
-        ( $triple ? $sparql_queries .= generate_sparql_insert( $triple ) : null );
+        $query = generate_sparql_insert( $triple );
+        ( $triple ? $sparql_queries .= $sparql_queries.=$query : null );
+        return $query;
     };
 
-    function generate_list( $values ){
-        $list = "(";
-        foreach ($article->index_keywords as $key => $value) 
-            $list .= literal( $value ) . " ";
-        return $list . ")";
+    function add_to_triples( $subject, $predicate, $object ){
+        $triple = generate_triple( $subject, $predicate, $object );
+        ( $triple ? $triples.= $triple . "\n" : null );
+        return $triple;
     }
 
-    //formatter: $merged_articles
+    function generate_list( $blank_node_id, $values ){
+        $list_triples = [];
+        array_push( generate_triple( $blank_node_id, rdf("type"), rdf( "list" ) ), $list_triples );
+        
+        $values = array_filter( $values );
+        $last_key = count($values) - 1;
+        foreach( $values as $key => $value){
+            array_push( generate_triple( $blank_node_id, rdf("first"), literal( $value ) ), $list_triples );
+            if( $key !== $last_key ){
+                $next_blank_node_id = generate_blank_node_id();
+                array_push( generate_triple( $blank_node_id, rdf("rest"), $next_blank_node_id ), $list_triples );
+                $blank_node_id = $next_blank_node_id;
+            }else{
+                array_push( generate_triple( $blank_node_id, rdf("rest"), rdf("nil") ), $list_triples );
+            }
+        }
+        return $list_triples;
+    }
+
+    function process_list( $subject, $term, $list ){
+        $blank_node_id = generate_blank_node_id();
+        add_to_triples( $subject, local_terms($term), "_:b$blank_node_id" );
+        $triples_list = generate_list( "_:b$blank_node_id", $list );
+        array_map( add_to_triples( $in ), $triples_list );
+        array_map( add_to_sparql_queries( $in ), $triples_list );
+    }
+
+    //formatter.php: $merged_articles
     foreach( $merged_articles as $key => $article ){
 
         $articleFname = preg_replace("/[^a-zA-Z0-9]+/", "", str_replace( " ", "_", str_replace( ".", "", $article->title ) ) );
+        $subject = local_objects( "article/" . $articleFname );
 
-        //Block: Article base
+        //Block: Article
         {
-            
-            $subject = local_objects( "article/" . $articleFname );
 
-            $title = generate_triple( $subject, local_terms("title"), literal( $article->title ) );
-            $year = generate_triple( $subject, local_terms("year"), literal( $article->year ) );
-            $source_title = generate_triple( $subject, local_terms("source_title"), literal( $article->source_title ) );
-            $volume = generate_triple( $subject, local_terms("volume"), literal( $article->volume ));
-            $issue = generate_triple( $subject, local_terms("issue"), literal( $article->issue ));
-            $article_no = generate_triple( $subject, local_terms("article_no"), literal( $article->article_no ) );
-            $page_start = generate_triple( $subject, local_terms("page_start"), literal( $article->page_start ) );
-            $page_end = generate_triple( $subject, local_terms("page_end"), literal( $article->page_end ) );
-            $cited_by = generate_triple( $subject, local_terms("cited_by"), literal( $article->cited_by ) );
-            $doi = generate_triple( $subject, local_terms("doi"), literal( $article->doi ) );
-            $link = generate_triple( $subject, local_terms("link"), literal( $article->link ) );
-            $abstract = generate_triple( $subject, local_terms("abstract"), literal( $article->abstract ) );
-            $correspondence_address = generate_triple( $subject, local_terms("correspondence_address"), literal( $article->correspondence_address ) );
-            $publisher = generate_triple( $subject, local_terms("publisher"), literal( $article->publisher ) ); //_b:
-            $issn = generate_triple( $subject, local_terms("issn"), literal( $article->issn ) );
-            $coden = generate_triple( $subject, local_terms("coden"), literal( $article->coden ) );
-            $pubmed_id = generate_triple( $subject, local_terms("pubmed_id"), literal( $article->pubmed_id ) );
-            $original_language = generate_triple( $subject, local_terms("original_language"), literal( $article->original_language ) );
-            $abbreviated_source_title = generate_triple( $subject, local_terms("abbreviated_source_title"), literal( $article->abbreviated_source_title ) );
-            $eid = generate_triple( $subject, local_terms("eid"), literal( $article->eid ) );
-            $ScopusArticle = generate_triple( $subject, rdf("type"), local_objects( "ScopusArticle" ) );
+            $title = add_to_triples( $subject, local_terms("title"), literal( $article->title ) );
+            $year = add_to_triples( $subject, local_terms("year"), literal( $article->year ) );
+            $source_title = add_to_triples( $subject, local_terms("source_title"), literal( $article->source_title ) );
+            $volume = add_to_triples( $subject, local_terms("volume"), literal( $article->volume ));
+            $issue = add_to_triples( $subject, local_terms("issue"), literal( $article->issue ));
+            $article_no = add_to_triples( $subject, local_terms("article_no"), literal( $article->article_no ) );
+            $page_start = add_to_triples( $subject, local_terms("page_start"), literal( $article->page_start ) );
+            $page_end = add_to_triples( $subject, local_terms("page_end"), literal( $article->page_end ) );
+            $cited_by = add_to_triples( $subject, local_terms("cited_by"), literal( $article->cited_by ) );
+            $doi = add_to_triples( $subject, local_terms("doi"), literal( $article->doi ) );
+            $link = add_to_triples( $subject, local_terms("link"), literal( $article->link ) );
+            $abstract = add_to_triples( $subject, local_terms("abstract"), literal( $article->abstract ) );
+            $correspondence_address = add_to_triples( $subject, local_terms("correspondence_address"), literal( $article->correspondence_address ) );
+            $publisher = add_to_triples( $subject, local_terms("publisher"), literal( $article->publisher ) ); //_b:
+            $issn = add_to_triples( $subject, local_terms("issn"), literal( $article->issn ) );
+            $coden = add_to_triples( $subject, local_terms("coden"), literal( $article->coden ) );
+            $pubmed_id = add_to_triples( $subject, local_terms("pubmed_id"), literal( $article->pubmed_id ) );
+            $original_language = add_to_triples( $subject, local_terms("original_language"), literal( $article->original_language ) );
+            $abbreviated_source_title = add_to_triples( $subject, local_terms("abbreviated_source_title"), literal( $article->abbreviated_source_title ) );
+            $eid = add_to_triples( $subject, local_terms("eid"), literal( $article->eid ) );
+            $ScopusArticle = add_to_triples( $subject, rdf("type"), local_objects( "ScopusArticle" ) );
             
             add_to_sparql_queries( $title );
             add_to_sparql_queries( $year );
@@ -87,42 +115,14 @@
             add_to_sparql_queries( $abbreviated_source_title );
             add_to_sparql_queries( $eid );
             add_to_sparql_queries( $ScopusArticle );
+
+            // process_list( ... ) calls add_to_triples( ... ) and add_to_sparql_queries( ... ) internaly.
+            process_list( $subject, "author_keywords", $article->author_keywords );
+            process_list( $subject, "index_keywords", $article->index_keywords );
+            process_list( $subject, "chemicals_cas", $article->chemicals_cas );
+            process_list( $subject, "tradenames", $article->tradenames );
+            process_list( $subject, "references", $article->references );
             
-        }
-
-        //Block: author_keywords
-        {
-            $subject = local_objects( "article/" . $articleFname );
-            $list = generate_triple( $subject, local_terms("author_keywords"), generate_list( $article->author_keywords ) );
-            add_to_sparql_queries( $list);
-        }
-
-        //Block: index_keywords
-        {
-            $subject = local_objects( "article/" . $articleFname );
-            $list = generate_triple( $subject, local_terms("index_keywords"), generate_list( $article->index_keywords ) );
-            add_to_sparql_queries( $list);
-        }
-
-        //Block: chemicals_cas
-        {
-            $subject = local_objects( "article/" . $articleFname );
-            $list = generate_triple( $subject, local_terms("chemicals_cas"), generate_list( $article->chemicals_cas ) );
-            add_to_sparql_queries( $list);
-        }
-
-        //Block: tradenames
-        {
-            $subject = local_objects( "article/" . $articleFname );
-            $list = generate_triple( $subject, local_terms("tradenames"), generate_list( $article->tradenames ) );
-            add_to_sparql_queries( $list);
-        }
-
-        //Block: references
-        {
-            $subject = local_objects( "article/" . $articleFname );
-            $list = generate_triple( $subject, local_terms("references"), generate_list( $article->references ) );
-            add_to_sparql_queries( $list);
         }
         
         //Block: author information
@@ -141,17 +141,17 @@
                     $subject_id = null;
                 }
 
-                $author = generate_triple( $subject, rdf("type"), foaf( "Person" ) );
-                $written_by = generate_triple( local_objects( "article/" . $articleFname ), local_terms("written_by"), $subject );
+                $author = add_to_triples( $subject, rdf("type"), foaf( "Person" ) );
+                $written_by = add_to_triples( local_objects( "article/" . $articleFname ), local_terms("written_by"), $subject );
 
-                $foaf_name = generate_triple( $subject, foaf("name"), literal( $author['name'] ) );
-                $foaf_account = generate_triple( $subject, foaf("account"), local_objects( $subject_id ) );
-                $foaf_account_name = generate_triple( local_objects( $subject_id ), foaf("accountName"), literal( $subject_id ) );
-                $foaf_account_service_homepage = generate_triple( local_objects( $subject_id ), foaf("accountServiceHomepage"), literal( "https://www.scopus.com/" ) );
+                $foaf_name = add_to_triples( $subject, foaf("name"), literal( $author['name'] ) );
+                $foaf_account = add_to_triples( $subject, foaf("account"), local_objects( $subject_id ) );
+                $foaf_account_name = add_to_triples( local_objects( $subject_id ), foaf("accountName"), literal( $subject_id ) );
+                $foaf_account_service_homepage = add_to_triples( local_objects( $subject_id ), foaf("accountServiceHomepage"), literal( "https://www.scopus.com/" ) );
                 
-                $foaf_group = generate_triple( local_groups( $object_affiliation ), foaf("name"), literal( $subject_affiliation ) );
-                $foaf_group_type = generate_triple( local_groups( $object_affiliation ), rdf("type"), foaf( "group" ) );
-                $foaf_member = generate_triple( local_groups( $object_affiliation ), foaf("member"), $subject );
+                $foaf_group = add_to_triples( local_groups( $object_affiliation ), foaf("name"), literal( $subject_affiliation ) );
+                $foaf_group_type = add_to_triples( local_groups( $object_affiliation ), rdf("type"), foaf( "group" ) );
+                $foaf_member = add_to_triples( local_groups( $object_affiliation ), foaf("member"), $subject );
 
                 add_to_sparql_queries( $author );
                 add_to_sparql_queries( $written_by );
@@ -167,9 +167,9 @@
         }
     }
 
-    $file = 'rdf.nt';
+    $file = 'triples.nt';
     file_put_contents( $file, $triples );
-    $file = 'graph.rq';
+    $file = 'queries.rq';
     file_put_contents( $file, $sparql_queries );
     
 
