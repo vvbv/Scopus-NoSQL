@@ -1,4 +1,5 @@
 <?php 
+
     require( "formatter.php" );
     
     function generate_object( $iri_base, $in ){
@@ -172,6 +173,4 @@
     $file = 'queries.rq';
     file_put_contents( $file, $sparql_queries );
     
-
-
 ?>
