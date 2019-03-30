@@ -153,22 +153,25 @@
                 $foaf_group_type = generate_triple( local_groups( $object_affiliation ), rdf("type"), foaf( "group" ) );
                 $foaf_member = generate_triple( local_groups( $object_affiliation ), foaf("member"), $subject );
 
-                $sparql_queries .=  $type_person  . 
-                $written_by .
-                $foaf_name  . 
-                $foaf_account  . 
-                $foaf_account_name  . 
-                $foaf_account_service_homepage . 
-                $foaf_group  . 
-                $foaf_group_type  . 
-                $foaf_member;
+                add_to_sparql_queries( $author );
+                add_to_sparql_queries( $written_by );
+                add_to_sparql_queries( $foaf_name );
+                add_to_sparql_queries( $foaf_account );
+                add_to_sparql_queries( $foaf_account_name );
+                add_to_sparql_queries( $foaf_account_service_homepage );
+                add_to_sparql_queries( $foaf_group );
+                add_to_sparql_queries( $foaf_group_type );
+                add_to_sparql_queries( $foaf_member );
 
             }
         }
     }
 
+    $file = 'rdf.nt';
+    file_put_contents( $file, $triples );
     $file = 'graph.rq';
     file_put_contents( $file, $sparql_queries );
+    
 
 
 ?>
