@@ -1,3 +1,4 @@
 dataset/merged_articles.json
 dataset/mongo_dataset.json
-dataset/graph.rq
+dataset/queries.rq
+dataset/triples.nt
