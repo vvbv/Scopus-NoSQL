@@ -1,33 +1,23 @@
 <?php 
     require( "formatter.php" );
 
-    function local_objects( $in ){
-        return "<http://127.0.0.1/objects/$in>";
-    };
-    function local_terms( $in ){
-        return "<http://127.0.0.1/terms/$in>";
-    };
-    function local_groups( $in ){
-        return "<http://127.0.0.1/groups/$in>";
-    };
-    function foaf( $in ){
-        return "<http://xmlns.com/foaf/0.1/$in>";
-    };
-    function rdf( $in ){
-        return "<http://www.w3.org/1999/02/22-rdf-syntax-ns#$in>";
-    };
-    function literal( $in ){
-        return ( ( gettype( $in ) === "string" ) ? "'$in'" : $in );
+    function generate_object( $iri_base, $in ){
+        return ( $in ? "<".$iri_base.$in.">" : null );
     }
 
-    $sparql_base = "SPARQL INSERT INTO <articles_metadata> {";
+    function local_objects( $in )   { return generate_object( "http://127.0.0.1/objects/" , $in ); };
+    function local_terms( $in )     { return generate_object( "http://127.0.0.1/http://127.0.0.1/terms/" , $in ); };
+    function local_groups( $in )    { return generate_object( "http://127.0.0.1/http://127.0.0.1/groups/" , $in ); };
+    function foaf( $in )            { return generate_object( "http://127.0.0.1/http://xmlns.com/foaf/0.1/" , $in ); };
+    function rdf( $in )             { return generate_object( "http://127.0.0.1/http://www.w3.org/1999/02/22-rdf-syntax-ns#" , $in ); };
+    function literal( $in )         { return ( ( gettype( $in ) === "string" ) ? "'$in'" : $in ); };
 
     function generate_triple( $subject, $predicate, $object ){
         return ( ($subject && $object) ? $subject." ".$predicate." ".$object."." : null );
     }
 
     function generate_sparql_insert( $triple ){
-        return ( ($triple) ? $sparql_base.$triple."}\n" : null );
+        return ( ($triple) ? "SPARQL INSERT INTO <articles_metadata> {".$triple."}\n" : null );
     }
 
     $sparql_queries = "";
@@ -141,7 +131,7 @@
 
                 $fname = preg_replace("/[^a-zA-Z0-9]+/", "", str_replace( " ", "_",  str_replace( ".", "", $author['name'] ) ) );
 
-                $subject = "<" . $local_objects . "author/" . $fname . ">";
+                $subject = local_objects( "author/" . $fname );
                 $subject_name = str_replace( "'", "\\'", $author['name'] );
                 $subject_id = $author['id'];
                 $subject_affiliation = preg_replace("/[\n\r]/", "",  str_replace( "'", "\\'", $author['affiliation'] ) );
@@ -151,20 +141,9 @@
                     $subject_id = null;
                 }
 
-                $type_person = 
-                    $sparql_base . $subject . " " . 
-                    $rdf_type . " " . 
-                    "<" .  $foaf . "Person" . ">" . ".};\n"; 
-                
-                $written_by =
-                    $sparql_base . "<" . $local_objects . "article/" . $articleFname . ">" . " " . 
-                    "<" . $local_terms . "written_by" . ">" . " " . 
-                    $subject . ".};\n";
-                    
-                $foaf_name = 
-                    $sparql_base .$subject . " " . 
-                    "<" . $foaf . "name" . ">" . " " . 
-                    literal( $author['name']  ) . ".};\n";
+                $type_person = generate_triple($subject, rdf("type"), foaf( "Person"  ) );
+                $written_by = generate_triple(local_objects( "article/" . $articleFname ), local_terms("written_by"), $subject );
+                $foaf_name = generate_triple($subject, foaf("name"), literal( $author['name'] ) );
                 
                 $foaf_account = null;
                 if( $subject_id ){
