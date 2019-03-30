@@ -54,7 +54,7 @@
         foreach( $values as $key => $value){
             array_push( $list_triples, generate_triple( $blank_node_id, rdf("first"), literal( $value ) ) );
             if( $key !== $last_key ){
-                $next_blank_node_id = generate_blank_node_id();
+                $next_blank_node_id = "_:b".generate_blank_node_id();
                 array_push( $list_triples, generate_triple( $blank_node_id, rdf("rest"), $next_blank_node_id ) );
                 $blank_node_id = $next_blank_node_id;
             }else{
