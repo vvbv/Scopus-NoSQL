@@ -1,23 +1,23 @@
 <?php 
     require( "formatter.php" );
 
-    function local_objects($in){
+    function local_objects( $in ){
         return "<http://127.0.0.1/objects/$in>";
     };
-    function local_terms($in){
+    function local_terms( $in ){
         return "<http://127.0.0.1/terms/$in>";
     };
-    function local_groups($in){
+    function local_groups( $in ){
         return "<http://127.0.0.1/groups/$in>";
     };
-    function foaf($in){
+    function foaf( $in ){
         return "<http://xmlns.com/foaf/0.1/$in>";
     };
-    function rdf($in){
+    function rdf( $in ){
         return "<http://www.w3.org/1999/02/22-rdf-syntax-ns#$in>";
     };
-    function literal($in){
-        return ( ( gettype($in) === "string" ) ? "'$in'" : $in );
+    function literal( $in ){
+        return ( ( gettype( $in ) === "string" ) ? "'$in'" : $in );
     }
 
     $sparql_base = "SPARQL INSERT INTO <articles_metadata> {";
@@ -37,6 +37,13 @@
         ( $triple ? $sparql_queries .= generate_sparql_insert( $triple ) : null );
     };
 
+    function generate_list( $values ){
+        $list = "(";
+        foreach ($article->index_keywords as $key => $value) 
+            $list .= literal( $value ) . " ";
+        return $list . ")";
+    }
+
     //formatter: $merged_articles
     foreach( $merged_articles as $key => $article ){
 
@@ -45,7 +52,7 @@
         //Block: Article base
         {
             
-            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
+            $subject = local_objects( "article/" . $articleFname );
 
             $title = generate_triple($subject, local_terms("title"), literal( $article->title ) );
             $year = generate_triple($subject, local_terms("year"), literal( $article->year ) );
@@ -95,67 +102,37 @@
 
         //Block: author_keywords
         {
-            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
-            $list = $sparql_base . $subject . " " . "rdf:list" . " (";
-
-            foreach ($article->author_keywords as $key => $value) {
-                $list .= literal( $value ). " ";
-            }
-
-            $list .= ").};\n";
-            $sparql_queries .=  $list;
+            $subject = local_objects( "article/" . $articleFname );
+            $list = generate_triple($subject, local_terms("author_keywords"), generate_list( $article->author_keywords ) );
+            add_to_sparql_queries($list);
         }
 
         //Block: index_keywords
         {
-            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
-            $list = $sparql_base . $subject . " " . "rdf:list" . " (";
-
-            foreach ($article->index_keywords as $key => $value) {
-                $list .= literal( $value ) . " ";
-            }
-
-            $list .= ").};\n";
-            $sparql_queries .=  $list;
+            $subject = local_objects( "article/" . $articleFname );
+            $list = generate_triple($subject, local_terms("index_keywords"), generate_list( $article->index_keywords ) );
+            add_to_sparql_queries($list);
         }
 
         //Block: chemicals_cas
         {
-            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
-            $list = $sparql_base . $subject . " " . "rdf:list" . " (";
-
-            foreach ($article->chemicals_cas as $key => $value) {
-                $list .= literal( $value ) . " ";
-            }
-
-            $list .= ").};\n";
-            $sparql_queries .=  $list;
+            $subject = local_objects( "article/" . $articleFname );
+            $list = generate_triple($subject, local_terms("chemicals_cas"), generate_list( $article->chemicals_cas ) );
+            add_to_sparql_queries($list);
         }
 
         //Block: tradenames
         {
-            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
-            $list = $sparql_base . $subject . " " . "rdf:list" . " (";
-
-            foreach ($article->tradenames as $key => $value) {
-                $list .= literal( $value ) . " ";
-            }
-
-            $list .= ").};\n";
-            $sparql_queries .=  $list;
+            $subject = local_objects( "article/" . $articleFname );
+            $list = generate_triple($subject, local_terms("tradenames"), generate_list( $article->tradenames ) );
+            add_to_sparql_queries($list);
         }
 
         //Block: references
         {
-            $subject = "<" . $local_objects . "article/" . $articleFname . ">";
-            $list = $sparql_base . $subject . " " . "rdf:list" . " (";
-
-            foreach ($article->references as $key => $value) {
-                $list .= literal( $value ) . " ";
-            }
-
-            $list .= ").};\n";
-            $sparql_queries .=  $list;
+            $subject = local_objects( "article/" . $articleFname );
+            $list = generate_triple($subject, local_terms("references"), generate_list( $article->references ) );
+            add_to_sparql_queries($list);
         }
         
         //Block: author information
