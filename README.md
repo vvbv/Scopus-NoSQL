@@ -52,7 +52,7 @@ SELECT ?articles ?title FROM <articles_metadata>  WHERE {
 };
 ```
 **Consulta en 1 linea compatible con isql**  
-```SPARQL SPARQL PREFIX lo: <http://127.0.0.1/objects/> PREFIX lt: <http://127.0.0.1/terms/> SELECT ?articles ?title FROM <articles_metadata>  WHERE {  ?person rdf:type foaf:Person. ?person foaf:name "Lv C.". ?articles lt:written_by ?person. ?articles lt:title ?title.};```
+```SPARQL PREFIX lo: <http://127.0.0.1/objects/> PREFIX lt: <http://127.0.0.1/terms/> SELECT ?articles ?title FROM <articles_metadata>  WHERE {  ?person rdf:type foaf:Person. ?person foaf:name "Lv C.". ?articles lt:written_by ?person. ?articles lt:title ?title.};```
 
 
 <hr>
