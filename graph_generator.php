@@ -7,10 +7,10 @@
     }
 
     function local_objects( $in )       { return generate_object( "http://127.0.0.1/objects/" , $in ); };
-    function local_terms( $in )         { return generate_object( "http://127.0.0.1/http://127.0.0.1/terms/" , $in ); };
-    function local_groups( $in )        { return generate_object( "http://127.0.0.1/http://127.0.0.1/groups/" , $in ); };
-    function foaf( $in )                { return generate_object( "http://127.0.0.1/http://xmlns.com/foaf/0.1/" , $in ); };
-    function rdf( $in )                 { return generate_object( "http://127.0.0.1/http://www.w3.org/1999/02/22-rdf-syntax-ns#" , $in ); };
+    function local_terms( $in )         { return generate_object( "http://127.0.0.1/terms/" , $in ); };
+    function local_groups( $in )        { return generate_object( "http://127.0.0.1/groups/" , $in ); };
+    function foaf( $in )                { return generate_object( "http://xmlns.com/foaf/0.1/" , $in ); };
+    function rdf( $in )                 { return generate_object( "http://www.w3.org/1999/02/22-rdf-syntax-ns#" , $in ); };
     function literal( $in )             { return ( ( $in && ( $in != "''" ) ) ? ( ( gettype( $in ) === "string" ) ? "'$in'^^xsd:string" : "'$in'^^xsd:integer" ) : null); };
     function generate_blank_node_id()   { return substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 20); };
 
