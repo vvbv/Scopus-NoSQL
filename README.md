@@ -7,7 +7,7 @@ El siguiente repositorio contiene todo lo necesario para la construcción de una
 
 - <strong>Nombre de la base de datos:</strong> proyecto_nosql  
 - <strong>Nombre de la colección:</strong> articles  
-
+- <strong>Nombre del grafo:</strong> articles_metadata  
 <hr>
 
 ###  Descarga y ejecución [ <a href="https://hub.docker.com/r/vvbv/nosqlscopus">dockerhub</a> ]:
@@ -59,7 +59,6 @@ SELECT ?articles ?title FROM <articles_metadata>  WHERE {
 <hr>
 
 ### Presentado por:
-- Juan Felipe Orozco Escobar - 1426244-3743
-- Jeison Cardona Gomez - 1325562-3743
-
+- Jeison Cardona Gomez          1325562-3743
+- Juan Felipe Orozco Escobar    1426244-3743
 <hr>
