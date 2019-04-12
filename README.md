@@ -59,6 +59,6 @@ SELECT ?articles ?title FROM <articles_metadata>  WHERE {
 <hr>
 
 ### Presentado por:
-- Jeison Cardona Gomez          1325562-3743
-- Juan Felipe Orozco Escobar    1426244-3743
+- Jeison Cardona Gomez              1325562-3743
+- Juan Felipe Orozco Escobar        1426244-3743
 <hr>
