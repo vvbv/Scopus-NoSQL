@@ -27,7 +27,7 @@ docker run -it vvbv/nosqlscopus:v3 #Entrega 1
 
 Cantidad de artículos publicados en un determinado año:
 
-- ```db.articles.find({"year":2017}).count() ``` → 1000
+- ```db.articles.find({"year":2017}).count()``` → 1000
 - ```db.articles.find({"year":2018}).count()``` → 1000
 - ```db.articles.find({"year":2019}).count()``` → 1000
 
