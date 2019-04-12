@@ -14,6 +14,7 @@ El siguiente repositorio contiene todo lo necesario para la construcción de una
 
 ```bash
 docker run -it vvbv/nosqlscopus:v3 #Entrega 1
+docker run -it vvbv/nosqlscopus:v5 #Entrega 3 (Beta)
 ```
 <hr>  
 
