@@ -1,7 +1,7 @@
 # Scopus NoSQL*
 _<strong><small>* Repositorio base para la construcción de una imagen de docker.</small></strong>_  
 <hr>
-El siguiente repositorio contiene todo lo necesario para la construcción de una imagen de docker, la cual va a contener una base de datos almacenada en <strong>MongoDB</strong> y n grafo RDF almacenado en <strong>Virtuoso-Opensource</strong> con los metadatos formateados de inicialmente 3000 artículos que hablan sobre el cancer, publicados en <strong>Scopus.com</strong> entre los años 2017 y 2019. 
+El siguiente repositorio contiene todo lo necesario para la construcción de una imagen de docker, la cual va a contener una base de datos almacenada en <strong>MongoDB</strong> y un grafo RDF almacenado en <strong>Virtuoso-Opensource</strong> con los metadatos formateados de inicialmente 3000 artículos que hablan sobre el cancer, publicados en <strong>Scopus.com</strong> entre los años 2017 y 2019. 
 <br>
 <br>  
 
