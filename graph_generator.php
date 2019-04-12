@@ -19,7 +19,7 @@
     }
 
     function generate_sparql_insert( $triple ){
-        return ( $triple ? "SPARQL INSERT INTO <articles_metadata> {".$triple."};\n" : null );
+        return ( $triple ? "SPARQL INSERT INTO <articles_metadata_> {".$triple."};\n" : null );
     }
 
     $sparql_queries = "";
