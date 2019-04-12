@@ -16,5 +16,6 @@ echo "[UTC $(date +"%T")][Virtuoso]: Iniciando importación de triplas."
 isql 127.0.0.1:1111 dba root < /tools/import_vt.isql > /dev/null
 echo "[UTC $(date +"%T")][Virtuoso]: Triplas importadas."
 echo "[UTC $(date +"%T")][General]: Ahora puede acceder a los datos de Mongo y Virtuoso(RDF) escribiendo el comando mongo o isql respectivamente, se iniciará isql por defecto."
+echo ""
 isql 127.0.0.1:1111 dba root
 /bin/bash
