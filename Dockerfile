@@ -12,6 +12,7 @@ COPY dataset/json /dataset/json
 RUN rm /virtuoso-entrypoint.sh
 COPY general_entrypoint.sh /entrypoint/general_entrypoint.sh
 COPY virtuoso_entrypoint.sh /entrypoint/virtuoso_entrypoint.sh
+COPY import_vt.isql /tools/import_vt.isql
 
 WORKDIR /dataset/
 RUN php -f /tools/graph_generator.php

@@ -1,0 +1,2 @@
+ld_dir ('/dataset', '*.nt', 'articles_metadata');
+rdf_loader_run();
