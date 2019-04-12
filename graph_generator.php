@@ -18,19 +18,7 @@
         return ( ($subject && $object) ? $subject." ".$predicate." ".$object."." : null );
     }
 
-    function generate_sparql_insert( $triple ){
-        return ( $triple ? "SPARQL INSERT INTO <articles_metadata> {".$triple."};\n" : null );
-    }
-
-    $sparql_queries = "";
     $triples = "";
-
-    function add_to_sparql_queries( $triple ){
-        global $sparql_queries;
-        $query = generate_sparql_insert( $triple );
-        ( $triple ? $sparql_queries .= $query : null );
-        return $query;
-    };
 
     function add_to_triples( $subject, $predicate, $object ){
         global $triples;
@@ -69,7 +57,6 @@
         add_to_triples( $subject, local_terms($term), "_:b$blank_node_id" );
         $triples_list = generate_list( "_:b$blank_node_id", $list );
         array_map( "add_to_triples_from_string", $triples_list );
-        array_map( "add_to_sparql_queries", $triples_list );
     }
 
     //formatter.php: $merged_articles
@@ -102,30 +89,8 @@
             $abbreviated_source_title = add_to_triples( $subject, local_terms("abbreviated_source_title"), literal( $article->abbreviated_source_title ) );
             $eid = add_to_triples( $subject, local_terms("eid"), literal( $article->eid ) );
             $ScopusArticle = add_to_triples( $subject, rdf("type"), local_objects( "ScopusArticle" ) );
-            
-            add_to_sparql_queries( $title );
-            add_to_sparql_queries( $year );
-            add_to_sparql_queries( $source_title );
-            add_to_sparql_queries( $volume );
-            add_to_sparql_queries( $issue );
-            add_to_sparql_queries( $article_no );
-            add_to_sparql_queries( $page_start );
-            add_to_sparql_queries( $page_end );
-            add_to_sparql_queries( $cited_by );
-            add_to_sparql_queries( $doi );
-            add_to_sparql_queries( $link );
-            add_to_sparql_queries( $abstract );
-            add_to_sparql_queries( $correspondence_address );
-            add_to_sparql_queries( $publisher );
-            add_to_sparql_queries( $issn );
-            add_to_sparql_queries( $coden );
-            add_to_sparql_queries( $pubmed_id );
-            add_to_sparql_queries( $original_language );
-            add_to_sparql_queries( $abbreviated_source_title );
-            add_to_sparql_queries( $eid );
-            add_to_sparql_queries( $ScopusArticle );
-
-            // process_list( ... ) calls add_to_triples( ... ) and add_to_sparql_queries( ... ) internaly.
+           
+            // process_list( ... ) calls add_to_triples( ... ) internaly.
             process_list( $subject, "author_keywords", $article->author_keywords );
             process_list( $subject, "index_keywords", $article->index_keywords );
             process_list( $subject, "chemicals_cas", $article->chemicals_cas );
@@ -161,16 +126,6 @@
                 $foaf_group = add_to_triples( local_groups( $object_affiliation ), foaf("name"), literal( $subject_affiliation ) );
                 $foaf_group_type = add_to_triples( local_groups( $object_affiliation ), rdf("type"), foaf( "group" ) );
                 $foaf_member = add_to_triples( local_groups( $object_affiliation ), foaf("member"), $subject );
-
-                add_to_sparql_queries( $author );
-                add_to_sparql_queries( $written_by );
-                add_to_sparql_queries( $foaf_name );
-                add_to_sparql_queries( $foaf_account );
-                add_to_sparql_queries( $foaf_account_name );
-                add_to_sparql_queries( $foaf_account_service_homepage );
-                add_to_sparql_queries( $foaf_group );
-                add_to_sparql_queries( $foaf_group_type );
-                add_to_sparql_queries( $foaf_member );
 
             }
         }
