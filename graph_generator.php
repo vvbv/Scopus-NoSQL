@@ -133,7 +133,5 @@
 
     $file = 'triples.nt';
     file_put_contents( $file, $triples );
-    $file = 'queries.rq';
-    file_put_contents( $file, $sparql_queries );
     
 ?>
