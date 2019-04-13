@@ -40,21 +40,33 @@ determinado autor ha hecho parte de este:
 <hr>
 
 ### Pruebas [SPARQL]:
-
+- Artículos en los que <strong>Lv C.</strong> ha participado como autor.  
 ```sparql
 
 PREFIX lo: <http://127.0.0.1/objects/> 
 PREFIX lt: <http://127.0.0.1/terms/> 
 
 SELECT ?articles ?title FROM <articles_metadata>  WHERE { 
- ?person rdf:type foaf:Person.
- ?person foaf:name "Lv C."^^xsd:string.
- ?articles lt:written_by ?person.
- ?articles lt:title ?title.
+    ?person rdf:type foaf:Person.
+    ?person foaf:name "Lv C."^^xsd:string.
+    ?articles lt:written_by ?person.
+    ?articles lt:title ?title.
 };
 ```
 **Consulta en 1 linea compatible con isql**  
-```SPARQL PREFIX lo: <http://127.0.0.1/objects/> PREFIX lt: <http://127.0.0.1/terms/> SELECT ?articles ?title FROM <articles_metadata>  WHERE {  ?person rdf:type foaf:Person. ?person foaf:name "Lv C."^^xsd:string. ?articles lt:written_by ?person. ?articles lt:title ?title.};```
+```SPARQL PREFIX lo: <http://127.0.0.1/objects/> PREFIX lt: <http://127.0.0.1/terms/> SELECT ?articles ?title FROM <articles_metadata>  WHERE {  ?person rdf:type foaf:Person. ?person foaf:name "Lv C."^^xsd:string. ?articles lt:written_by ?person. ?articles lt:title ?title.};```  
+  
+- Cantidad de artículos escritos en el 2018.    
+
+```sparql
+PREFIX lt: <http://127.0.0.1/terms/>
+
+SELECT count(*) FROM <articles_metadata> WHERE{
+    ?article lt:year 2018.
+} 
+```
+**Consulta en 1 linea compatible con isql**  
+```SPARQL PREFIX lt: <http://127.0.0.1/terms/> SELECT count(*) FROM <articles_metadata> WHERE{?article lt:year 2018.};```
 
 
 <hr>
