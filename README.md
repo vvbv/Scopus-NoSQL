@@ -57,9 +57,9 @@ SELECT ?articles ?title FROM <articles_metadata>  WHERE {
     ?articles lt:title ?title.
 };
 ```
-  
+<hr>
 - Artículo más citado.   
-
+<hr>
 Consulta en 1 linea compatible con isql  
 ```SPARQL PREFIX lt: <http://127.0.0.1/terms/> SELECT ?title ?num_citations FROM <articles_metadata>  WHERE { { SELECT ?article ?num_citations FROM <articles_metadata> WHERE{?article lt:cited_by ?num_citations.} ORDER BY DESC( ?num_citations ) LIMIT 1}.?article lt:title ?title.};```
 
@@ -77,9 +77,9 @@ SELECT ?title ?num_citations FROM <articles_metadata>  WHERE {
     ?article lt:title ?title.
 }; 
 ```
-
+<hr>
 - Cantidad de artículos escritos en el **2018**.   
-
+<hr>
 Consulta en 1 linea compatible con isql  
 ```SPARQL PREFIX lt: <http://127.0.0.1/terms/> SELECT count(*) FROM <articles_metadata> WHERE{?article lt:year 2018.};```
 
