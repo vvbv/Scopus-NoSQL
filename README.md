@@ -40,7 +40,7 @@ determinado autor ha hecho parte de este:
 <hr>
 
 ### Pruebas [SPARQL]:
-Artículos en los que <strong>Lv C.</strong> ha participado como autor.  
+Artículos en los que <strong>Lv C.</strong> ha participado como autor:  
 
 **Consulta en 1 linea compatible con el cliente:**   
 - ```SPARQL PREFIX lo: <http://127.0.0.1/objects/> PREFIX lt: <http://127.0.0.1/terms/> SELECT ?articles ?title FROM <articles_metadata>  WHERE {  ?person rdf:type foaf:Person. ?person foaf:name "Lv C."^^xsd:string. ?articles lt:written_by ?person. ?articles lt:title ?title.};```  
@@ -58,7 +58,7 @@ SELECT ?articles ?title FROM <articles_metadata>  WHERE {
 };
 ```
 
-Artículo más citado.   
+Artículo más citado:   
 
 **Consulta en 1 linea compatible con el cliente:**  
 - ```SPARQL PREFIX lt: <http://127.0.0.1/terms/> SELECT ?title ?num_citations FROM <articles_metadata>  WHERE { { SELECT ?article ?num_citations FROM <articles_metadata> WHERE{?article lt:cited_by ?num_citations.} ORDER BY DESC( ?num_citations ) LIMIT 1}.?article lt:title ?title.};```
@@ -78,7 +78,7 @@ SELECT ?title ?num_citations FROM <articles_metadata>  WHERE {
 }; 
 ```
 
-Cantidad de artículos escritos en el **2018**.   
+Cantidad de artículos escritos en el **2018**:   
 
 **Consulta en 1 linea compatible con el cliente:**  
 - ```SPARQL PREFIX lt: <http://127.0.0.1/terms/> SELECT count(*) FROM <articles_metadata> WHERE{?article lt:year 2018.};```
