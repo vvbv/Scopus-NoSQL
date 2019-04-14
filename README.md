@@ -66,9 +66,9 @@ Consulta en 1 linea compatible con isql
 ```sparql
 PREFIX lt: <http://127.0.0.1/terms/>
 
-SELECT ?title ?num_citations FROM <articles_metadata_>  WHERE {
+SELECT ?title ?num_citations FROM <articles_metadata>  WHERE {
     {
-        SELECT ?article ?num_citations FROM <articles_metadata_> WHERE{
+        SELECT ?article ?num_citations FROM <articles_metadata> WHERE{
             ?article lt:cited_by ?num_citations.
         } 
         ORDER BY DESC( ?num_citations )
