@@ -41,6 +41,10 @@ determinado autor ha hecho parte de este:
 
 ### Pruebas [SPARQL]:
 - Artículos en los que <strong>Lv C.</strong> ha participado como autor.  
+
+Consulta en 1 linea compatible con isql  
+```SPARQL PREFIX lo: <http://127.0.0.1/objects/> PREFIX lt: <http://127.0.0.1/terms/> SELECT ?articles ?title FROM <articles_metadata>  WHERE {  ?person rdf:type foaf:Person. ?person foaf:name "Lv C."^^xsd:string. ?articles lt:written_by ?person. ?articles lt:title ?title.};```  
+
 ```sparql
 
 PREFIX lo: <http://127.0.0.1/objects/> 
@@ -53,8 +57,6 @@ SELECT ?articles ?title FROM <articles_metadata>  WHERE {
     ?articles lt:title ?title.
 };
 ```
-Consulta en 1 linea compatible con isql  
-```SPARQL PREFIX lo: <http://127.0.0.1/objects/> PREFIX lt: <http://127.0.0.1/terms/> SELECT ?articles ?title FROM <articles_metadata>  WHERE {  ?person rdf:type foaf:Person. ?person foaf:name "Lv C."^^xsd:string. ?articles lt:written_by ?person. ?articles lt:title ?title.};```  
   
 - Cantidad de artículos escritos en el **2018**.    
 
