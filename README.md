@@ -26,7 +26,7 @@ docker run -it vvbv/nosqlscopus:v5 #Entrega 3 (Beta)
 
 ### Pruebas [MongoDB]:
 
-**Cantidad de artículos publicados en un determinado año:**  
+**Cantidad de artículos existentes de un determinado año:**  
 
 - ```db.articles.find({"year":2017}).count()``` → 1000
 - ```db.articles.find({"year":2018}).count()``` → 1000
@@ -77,7 +77,7 @@ SELECT ?title ?num_citations FROM <articles_metadata>  WHERE {
 }; 
 ```
 
-**Cantidad de artículos escritos en el 2018:**  
+**Cantidad de artículos existentes del 2018:**  
 
 Consulta en 1 linea compatible con el cliente:  
 - ```SPARQL PREFIX lt: <http://127.0.0.1/terms/> SELECT count(*) FROM <articles_metadata> WHERE{?article lt:year 2018.};```
