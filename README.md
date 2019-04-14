@@ -58,7 +58,11 @@ SELECT ?articles ?title FROM <articles_metadata>  WHERE {
 };
 ```
   
-- Cantidad de artículos escritos en el **2018**.    
+- Cantidad de artículos escritos en el **2018**.   
+
+Consulta en 1 linea compatible con isql  
+```SPARQL PREFIX lt: <http://127.0.0.1/terms/> SELECT count(*) FROM <articles_metadata> WHERE{?article lt:year 2018.};```
+
 
 ```sparql
 PREFIX lt: <http://127.0.0.1/terms/>
@@ -67,9 +71,6 @@ SELECT count(*) FROM <articles_metadata> WHERE{
     ?article lt:year 2018.
 } 
 ```
-Consulta en 1 linea compatible con isql  
-```SPARQL PREFIX lt: <http://127.0.0.1/terms/> SELECT count(*) FROM <articles_metadata> WHERE{?article lt:year 2018.};```
-
 
 <hr>
 
