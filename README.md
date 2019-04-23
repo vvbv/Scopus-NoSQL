@@ -39,6 +39,9 @@ docker run -it vvbv/nosqlscopus:v5 #Entrega 3
 <hr>
 
 ### Pruebas [SPARQL]:
+
+**Instrucciones:** Cuando el contenedor termine de cargar, la consola quedará en *SQL>*, para ejecutar las pruebas, debe copiar lo que aparece en la sección, **Consulta en 1 linea compatible con el cliente** de cada prueba, y presionar enter.
+
 **Consulta que cuenta <strong>cuantos autores diferentes hay</strong> en la base de datos:**   
 
 Consulta en 1 linea compatible con el cliente:   
