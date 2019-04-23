@@ -39,6 +39,25 @@ docker run -it vvbv/nosqlscopus:v5 #Entrega 3
 <hr>
 
 ### Pruebas [SPARQL]:
+**Consulta que cuenta <strong>cuantos autores diferentes hay</strong> en la base de datos:**   
+
+Consulta en 1 linea compatible con el cliente:   
+- ```SPARQL PREFIX lo: <http://127.0.0.1/objects/> PREFIX lt: <http://127.0.0.1/terms/> SELECT count(*) WHERE {{SELECT ?author FROM <articles_metadata>  WHERE { ?articles rdf:type lo:ScopusArticle. ?articles lt:written_by ?author.} GROUP BY ?author}};```  → 17704
+
+```sparql
+PREFIX lo: <http://127.0.0.1/objects/> 
+PREFIX lt: <http://127.0.0.1/terms/> 
+
+SELECT count(*) WHERE {
+    {
+        SELECT ?author FROM <articles_metadata>  WHERE { 
+            ?articles rdf:type lo:ScopusArticle.
+            ?articles lt:written_by ?author.
+        } GROUP BY ?author
+    }
+};
+```
+
 **Artículos en los que <strong>Lv C.</strong> ha participado como autor:**  
 
 Consulta en 1 linea compatible con el cliente:   
